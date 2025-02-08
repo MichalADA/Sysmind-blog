@@ -1,5 +1,4 @@
 [build]
-base = "Sysmind"
 command = "hugo"
 publish = "public"
 
