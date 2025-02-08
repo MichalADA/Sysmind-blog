@@ -1,6 +1,6 @@
 [build]
-command = "hugo"
-publish = "public"
+command = "cd Sysmind && hugo"
+publish = "Sysmind/public"
 
 [context.production.environment]
 HUGO_VERSION = "0.143.1"
