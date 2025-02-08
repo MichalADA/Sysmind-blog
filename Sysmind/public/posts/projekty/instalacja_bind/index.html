@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Instalacja Bind | Sysmind Blog</title>
+<meta name="keywords" content="Linux, DNS">
+<meta name="description" content="Instalacja Bind lokalnie">
+<meta name="author" content="Michał Adamczyk">
+<link rel="canonical" href="http://localhost:1313/posts/projekty/instalacja_bind/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/projekty/instalacja_bind/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">Sysmind Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts/about/" title="O Mnie">
+                    <span>O Mnie</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/posts/projekty" title="Projekty">
+                    <span>Projekty</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Instalacja Bind
+    </h1>
+    <div class="post-description">
+      Instalacja Bind lokalnie
+    </div>
+    <div class="post-meta"><span title='2025-02-08 00:00:00 +0000 UTC'>February 8, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Michał Adamczyk
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#przewodnik-konfiguracji-lokalnego-serwera-dns-bind" aria-label="Przewodnik Konfiguracji Lokalnego Serwera DNS BIND">Przewodnik Konfiguracji Lokalnego Serwera DNS BIND</a><ul>
+                        
+                <li>
+                    <a href="#wymagania-wst%c4%99pne" aria-label="Wymagania wstępne">Wymagania wstępne</a></li>
+                <li>
+                    <a href="#instalacja" aria-label="Instalacja">Instalacja</a></li>
+                <li>
+                    <a href="#konfiguracja" aria-label="Konfiguracja">Konfiguracja</a><ul>
+                        
+                <li>
+                    <a href="#1-konfiguracja-stref-lokalnych" aria-label="1. Konfiguracja stref lokalnych">1. Konfiguracja stref lokalnych</a></li>
+                <li>
+                    <a href="#2-tworzenie-plik%c3%b3w-stref" aria-label="2. Tworzenie plików stref">2. Tworzenie plików stref</a><ul>
+                        
+                <li>
+                    <a href="#plik-strefy-prostej-forward" aria-label="Plik strefy prostej (forward)">Plik strefy prostej (forward)</a></li>
+                <li>
+                    <a href="#plik-strefy-odwrotnej-reverse" aria-label="Plik strefy odwrotnej (reverse)">Plik strefy odwrotnej (reverse)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-konfiguracja-opcji-bind" aria-label="3. Konfiguracja opcji BIND">3. Konfiguracja opcji BIND</a></li></ul>
+                </li>
+                <li>
+                    <a href="#weryfikacja-i-testowanie" aria-label="Weryfikacja i testowanie">Weryfikacja i testowanie</a><ul>
+                        
+                <li>
+                    <a href="#1-sprawd%c5%ba-sk%c5%82adni%c4%99-konfiguracji" aria-label="1. Sprawdź składnię konfiguracji">1. Sprawdź składnię konfiguracji</a></li>
+                <li>
+                    <a href="#2-zrestartuj-us%c5%82ug%c4%99-bind" aria-label="2. Zrestartuj usługę BIND">2. Zrestartuj usługę BIND</a></li>
+                <li>
+                    <a href="#3-przetestuj-rozwi%c4%85zywanie-dns" aria-label="3. Przetestuj rozwiązywanie DNS">3. Przetestuj rozwiązywanie DNS</a></li></ul>
+                </li>
+                <li>
+                    <a href="#rozwi%c4%85zywanie-problem%c3%b3w" aria-label="Rozwiązywanie problemów">Rozwiązywanie problemów</a></li>
+                <li>
+                    <a href="#typowe-problemy" aria-label="Typowe problemy">Typowe problemy</a></li>
+                <li>
+                    <a href="#aspekty-bezpiecze%c5%84stwa" aria-label="Aspekty bezpieczeństwa">Aspekty bezpieczeństwa</a></li>
+                <li>
+                    <a href="#dodatkowe-%c5%bar%c3%b3d%c5%82a" aria-label="Dodatkowe źródła">Dodatkowe źródła</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="przewodnik-konfiguracji-lokalnego-serwera-dns-bind">Przewodnik Konfiguracji Lokalnego Serwera DNS BIND<a hidden class="anchor" aria-hidden="true" href="#przewodnik-konfiguracji-lokalnego-serwera-dns-bind">#</a></h1>
+<p>Ten przewodnik pomoże Ci skonfigurować lokalny serwer DNS przy użyciu BIND9 do obsługi własnej domeny (np. mydomain.local) z obsługą rozwiązywania nazw w przód i wstecz.</p>
+<h2 id="wymagania-wstępne">Wymagania wstępne<a hidden class="anchor" aria-hidden="true" href="#wymagania-wstępne">#</a></h2>
+<ul>
+<li>
+<p>System Ubuntu/Debian</p>
+</li>
+<li>
+<p>Dostęp root lub sudo</p>
+</li>
+<li>
+<p>Podstawowa znajomość koncepcji DNS</p>
+</li>
+</ul>
+<h2 id="instalacja">Instalacja<a hidden class="anchor" aria-hidden="true" href="#instalacja">#</a></h2>
+<p>Zaktualizuj system i zainstaluj BIND9:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt upgrade -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt install bind9 bind9utils bind9-doc -y
+</span></span></code></pre></div><p>Sprawdź status usługi BIND:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo systemctl status bind9
+</span></span></code></pre></div><h2 id="konfiguracja">Konfiguracja<a hidden class="anchor" aria-hidden="true" href="#konfiguracja">#</a></h2>
+<h3 id="1-konfiguracja-stref-lokalnych">1. Konfiguracja stref lokalnych<a hidden class="anchor" aria-hidden="true" href="#1-konfiguracja-stref-lokalnych">#</a></h3>
+<p>Edytuj plik konfiguracji lokalnej:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo nano /etc/bind/named.conf.local
+</span></span></code></pre></div><p>Dodaj następujące konfiguracje stref:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">zone <span class="s2">&#34;mydomain.local&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">type</span> master<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    file <span class="s2">&#34;/etc/bind/zones/mydomain.local.zone&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">zone <span class="s2">&#34;0.0.127.in-addr.arpa&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">type</span> master<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    file <span class="s2">&#34;/etc/bind/zones/reverse.local.zone&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
+</span></span></code></pre></div><h3 id="2-tworzenie-plików-stref">2. Tworzenie plików stref<a hidden class="anchor" aria-hidden="true" href="#2-tworzenie-plików-stref">#</a></h3>
+<p>Utwórz katalog na strefy:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo mkdir -p /etc/bind/zones
+</span></span></code></pre></div><h4 id="plik-strefy-prostej-forward">Plik strefy prostej (forward)<a hidden class="anchor" aria-hidden="true" href="#plik-strefy-prostej-forward">#</a></h4>
+<p>Utwórz i edytuj plik strefy prostej:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo nano /etc/bind/zones/mydomain.local.zone
+</span></span></code></pre></div><p>Dodaj następującą konfigurację:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$TTL</span> <span class="m">86400</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@   IN  SOA   ns1.mydomain.local. admin.mydomain.local. <span class="o">(</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">2025011401</span> <span class="p">;</span> Numer seryjny
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">3600</span>       <span class="p">;</span> Odświeżanie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">1800</span>       <span class="p">;</span> Ponawianie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">1209600</span>    <span class="p">;</span> Wygaśnięcie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">86400</span> <span class="o">)</span>    <span class="p">;</span> Minimalny TTL
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@   IN  NS    ns1.mydomain.local.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@   IN  A     127.0.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ns1 IN  A     127.0.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">www IN  A     127.0.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app IN  A     127.0.0.2
+</span></span></code></pre></div><h4 id="plik-strefy-odwrotnej-reverse">Plik strefy odwrotnej (reverse)<a hidden class="anchor" aria-hidden="true" href="#plik-strefy-odwrotnej-reverse">#</a></h4>
+<p>Utwórz i edytuj plik strefy odwrotnej:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo nano /etc/bind/zones/reverse.local.zone
+</span></span></code></pre></div><p>Dodaj następującą konfigurację:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$TTL</span> <span class="m">86400</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@   IN  SOA   ns1.mydomain.local. admin.mydomain.local. <span class="o">(</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">2025011401</span> <span class="p">;</span> Numer seryjny
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">3600</span>       <span class="p">;</span> Odświeżanie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">1800</span>       <span class="p">;</span> Ponawianie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">1209600</span>    <span class="p">;</span> Wygaśnięcie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="m">86400</span> <span class="o">)</span>    <span class="p">;</span> Minimalny TTL
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@   IN  NS    ns1.mydomain.local.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">1</span>   IN  PTR   ns1.mydomain.local.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">1</span>   IN  PTR   www.mydomain.local.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">2</span>   IN  PTR   app.mydomain.local.
+</span></span></code></pre></div><h3 id="3-konfiguracja-opcji-bind">3. Konfiguracja opcji BIND<a hidden class="anchor" aria-hidden="true" href="#3-konfiguracja-opcji-bind">#</a></h3>
+<p>Edytuj plik opcji:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo nano /etc/bind/named.conf.options
+</span></span></code></pre></div><p>Dodaj następującą konfigurację:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">options <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    directory <span class="s2">&#34;/var/cache/bind&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    recursion yes<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    allow-query <span class="o">{</span> localhost<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    forwarders <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        8.8.8.8<span class="p">;</span>  // DNS Google
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        1.1.1.1<span class="p">;</span>  // DNS Cloudflare
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    dnssec-validation auto<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    listen-on <span class="o">{</span> 127.0.0.1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    listen-on-v6 <span class="o">{</span> ::1<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="weryfikacja-i-testowanie">Weryfikacja i testowanie<a hidden class="anchor" aria-hidden="true" href="#weryfikacja-i-testowanie">#</a></h2>
+<h3 id="1-sprawdź-składnię-konfiguracji">1. Sprawdź składnię konfiguracji<a hidden class="anchor" aria-hidden="true" href="#1-sprawdź-składnię-konfiguracji">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo named-checkconf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo named-checkzone mydomain.local /etc/bind/zones/mydomain.local.zone
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo named-checkzone 0.0.127.in-addr.arpa /etc/bind/zones/reverse.local.zone
+</span></span></code></pre></div><h3 id="2-zrestartuj-usługę-bind">2. Zrestartuj usługę BIND<a hidden class="anchor" aria-hidden="true" href="#2-zrestartuj-usługę-bind">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo systemctl restart bind9
+</span></span></code></pre></div><h3 id="3-przetestuj-rozwiązywanie-dns">3. Przetestuj rozwiązywanie DNS<a hidden class="anchor" aria-hidden="true" href="#3-przetestuj-rozwiązywanie-dns">#</a></h3>
+<p>Test wyszukiwania do przodu:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dig @127.0.0.1 www.mydomain.local
+</span></span></code></pre></div><p>Test wyszukiwania wstecznego:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dig -x 127.0.0.1 @127.0.0.1
+</span></span></code></pre></div><h2 id="rozwiązywanie-problemów">Rozwiązywanie problemów<a hidden class="anchor" aria-hidden="true" href="#rozwiązywanie-problemów">#</a></h2>
+<ol>
+<li>Sprawdź logi BIND:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo tail -f /var/log/syslog <span class="p">|</span> grep named
+</span></span></code></pre></div><ol start="2">
+<li>Sprawdź status usługi:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo systemctl status bind9
+</span></span></code></pre></div><ol>
+<li>Sprawdź uprawnienia plików stref:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo ls -l /etc/bind/zones/
+</span></span></code></pre></div><h2 id="typowe-problemy">Typowe problemy<a hidden class="anchor" aria-hidden="true" href="#typowe-problemy">#</a></h2>
+<ul>
+<li>
+<p><strong>Usługa nie uruchamia się</strong>: Sprawdź błędy składni w plikach konfiguracyjnych</p>
+</li>
+<li>
+<p><strong>Rozwiązywanie DNS nie działa</strong>: Sprawdź ustawienia zapory sieciowej i adresy nasłuchiwania BIND</p>
+</li>
+<li>
+<p><strong>Problemy z transferem stref</strong>: Sprawdź uprawnienia plików i składnię plików stref</p>
+</li>
+</ul>
+<h2 id="aspekty-bezpieczeństwa">Aspekty bezpieczeństwa<a hidden class="anchor" aria-hidden="true" href="#aspekty-bezpieczeństwa">#</a></h2>
+<ol start="2">
+<li>
+<p>Ogranicz transfery stref do zaufanych serwerów</p>
+</li>
+<li>
+<p>Skonfiguruj odpowiednie listy kontroli dostępu w <code>allow-query</code></p>
+</li>
+<li>
+<p>Aktualizuj BIND o najnowsze poprawki bezpieczeństwa</p>
+</li>
+<li>
+<p>Użyj DNSSEC dla zwiększonego bezpieczeństwa</p>
+</li>
+</ol>
+<h2 id="dodatkowe-źródła">Dodatkowe źródła<a hidden class="anchor" aria-hidden="true" href="#dodatkowe-źródła">#</a></h2>
+<ul>
+<li>
+<p><a href="https://www.isc.org/bind/">Dokumentacja BIND</a></p>
+</li>
+<li>
+<p><a href="https://ubuntu.com/server/docs/service-domain-name-service-dns">Przewodnik BIND dla Ubuntu</a></p>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/dns/">DNS</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Sysmind Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

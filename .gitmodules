@@ -1,0 +1,9 @@
+[submodule "Sysmind/themes/terminal"]
+	path = Sysmind/themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
+[submodule "Sysmind/themes/LoveIt"]
+	path = Sysmind/themes/LoveIt
+	url = https://github.com/dillonzq/LoveIt.git
+[submodule "Sysmind/themes/PaperMod"]
+	path = Sysmind/themes/PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod
