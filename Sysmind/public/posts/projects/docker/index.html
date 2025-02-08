@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Instalacja Docker | Sysmind Blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="Przewodnik Instalacji Dockera
@@ -28,16 +28,16 @@ echo &#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.g
 
 Instalacja Dockera:">
 <meta name="author" content="Michał Adamczyk">
-<link rel="canonical" href="http://localhost:1313/posts/projects/docker/">
+<link rel="canonical" href="/posts/projects/docker/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/projects/docker/">
+<link rel="alternate" hreflang="en" href="/posts/projects/docker/">
 <noscript>
     <style>
         #theme-toggle,
@@ -46,7 +46,90 @@ Instalacja Dockera:">
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="/posts/projects/docker/">
+  <meta property="og:site_name" content="Sysmind Blog">
+  <meta property="og:title" content="Instalacja Docker">
+  <meta property="og:description" content="Przewodnik Instalacji Dockera Docker to platforma konteneryzacji, która umożliwia uruchamianie aplikacji w lekkich, izolowanych środowiskach. Poniżej znajdziesz instrukcje instalacji dla różnych dystrybucji Linuxa.
+1. Ubuntu/Debian Aktualizacja systemu:
+sudo apt update &amp;&amp; sudo apt upgrade -y Instalacja wymaganych pakietów:
+sudo apt install -y curl apt-transport-https ca-certificates software-properties-common Dodanie repozytorium Dockera:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg echo &#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list Instalacja Dockera:">
+  <meta property="og:locale" content="pl">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-08T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Instalacja Docker">
+<meta name="twitter:description" content="Przewodnik Instalacji Dockera
+Docker to platforma konteneryzacji, która umożliwia uruchamianie aplikacji w lekkich, izolowanych środowiskach. Poniżej znajdziesz instrukcje instalacji dla różnych dystrybucji Linuxa.
+
+1. Ubuntu/Debian
+
+
+Aktualizacja systemu:
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+
+Instalacja wymaganych pakietów:
+sudo apt install -y curl apt-transport-https ca-certificates software-properties-common
+
+
+Dodanie repozytorium Dockera:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo &#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list
+
+
+Instalacja Dockera:">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Instalacja Docker",
+      "item": "/posts/projects/docker/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Instalacja Docker",
+  "name": "Instalacja Docker",
+  "description": "Przewodnik Instalacji Dockera Docker to platforma konteneryzacji, która umożliwia uruchamianie aplikacji w lekkich, izolowanych środowiskach. Poniżej znajdziesz instrukcje instalacji dla różnych dystrybucji Linuxa.\n1. Ubuntu/Debian Aktualizacja systemu:\nsudo apt update \u0026amp;\u0026amp; sudo apt upgrade -y Instalacja wymaganych pakietów:\nsudo apt install -y curl apt-transport-https ca-certificates software-properties-common Dodanie repozytorium Dockera:\ncurl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg echo \u0026#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\u0026#34; | sudo tee /etc/apt/sources.list.d/docker.list Instalacja Dockera:\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "Przewodnik Instalacji Dockera Docker to platforma konteneryzacji, która umożliwia uruchamianie aplikacji w lekkich, izolowanych środowiskach. Poniżej znajdziesz instrukcje instalacji dla różnych dystrybucji Linuxa.\n1. Ubuntu/Debian Aktualizacja systemu:\nsudo apt update \u0026\u0026 sudo apt upgrade -y Instalacja wymaganych pakietów:\nsudo apt install -y curl apt-transport-https ca-certificates software-properties-common Dodanie repozytorium Dockera:\ncurl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list Instalacja Dockera:\nsudo apt update sudo apt install -y docker-ce docker-ce-cli containerd.io Włączenie i uruchomienie Dockera:\nsudo systemctl enable docker sudo systemctl start docker Weryfikacja instalacji:\nsudo docker run hello-world 2. Red Hat/CentOS Aktualizacja systemu:\nsudo yum update -y Dodanie repozytorium Dockera:\nsudo yum install -y yum-utils sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo Instalacja Dockera:\nsudo yum install -y docker-ce docker-ce-cli containerd.io Włączenie i uruchomienie Dockera:\nsudo systemctl enable docker sudo systemctl start docker Weryfikacja instalacji:\nsudo docker run hello-world 3. Fedora Aktualizacja systemu:\nsudo dnf update -y Dodanie repozytorium Dockera:\nsudo dnf install -y dnf-plugins-core sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo Instalacja Dockera:\nsudo dnf install -y docker-ce docker-ce-cli containerd.io Włączenie i uruchomienie Dockera:\nsudo systemctl enable docker sudo systemctl start docker Weryfikacja instalacji:\nsudo docker run hello-world 4. Arch Linux Aktualizacja systemu:\nsudo pacman -Syu Instalacja Dockera:\nsudo pacman -S docker Włączenie i uruchomienie Dockera:\nsudo systemctl enable docker sudo systemctl start docker Dodanie użytkownika do grupy Docker (opcjonalne):\nsudo usermod -aG docker $USER Weryfikacja instalacji:\nsudo docker run hello-world Uwagi Oficjalna dokumentacja:\nUbuntu/Debian Red Hat/CentOS Fedora Arch Linux Upewnij się, że Twoja dystrybucja Linuxa wspiera wymaganą wersję jądra.\nDocker jest teraz gotowy do użycia! 🚀\n",
+  "wordCount" : "265",
+  "inLanguage": "en",
+  "datePublished": "2024-02-08T00:00:00Z",
+  "dateModified": "2024-02-08T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Michał Adamczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/posts/projects/docker/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sysmind Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -60,8 +143,8 @@ Instalacja Dockera:">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
-                <img src="http://localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+            <a href="/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="/images/sysmind_logo.jpg" alt="" aria-label="logo"
                     height="40">Sysmind Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
@@ -88,12 +171,12 @@ Instalacja Dockera:">
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/posts/about/" title="O Mnie">
+                <a href="/posts/about/" title="O Mnie">
                     <span>O Mnie</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/projects/" title="Projekty">
+                <a href="/posts/projects/" title="Projekty">
                     <span>Projekty</span>
                 </a>
             </li>
@@ -278,7 +361,7 @@ Instalacja Dockera:">
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Sysmind Blog</a></span> · 
+        <span>&copy; 2025 <a href="/">Sysmind Blog</a></span> · 
 
     <span>
         Powered by

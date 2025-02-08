@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Projekty on Sysmind Blog</title>
-    <link>http://localhost:1313/posts/projects/</link>
+    <link>/posts/projects/</link>
     <description>Recent content in Projekty on Sysmind Blog</description>
     <generator>Hugo -- 0.143.1</generator>
     <language>pl</language>
     <lastBuildDate>Sat, 08 Feb 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/projects/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/posts/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Instalacja Bind</title>
-      <link>http://localhost:1313/posts/projects/instalacja_bind/</link>
+      <link>/posts/projects/instalacja_bind/</link>
       <pubDate>Sat, 08 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/projects/instalacja_bind/</guid>
+      <guid>/posts/projects/instalacja_bind/</guid>
       <description>Instalacja Bind lokalnie</description>
     </item>
     <item>
       <title>Instalacja Docker</title>
-      <link>http://localhost:1313/posts/projects/docker/</link>
+      <link>/posts/projects/docker/</link>
       <pubDate>Thu, 08 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/projects/docker/</guid>
+      <guid>/posts/projects/docker/</guid>
       <description>&lt;h1 id=&#34;przewodnik-instalacji-dockera&#34;&gt;Przewodnik Instalacji Dockera&lt;/h1&gt;
 &lt;p&gt;Docker to platforma konteneryzacji, która umożliwia uruchamianie aplikacji w lekkich, izolowanych środowiskach. Poniżej znajdziesz instrukcje instalacji dla różnych dystrybucji Linuxa.&lt;/p&gt;
 &lt;hr&gt;

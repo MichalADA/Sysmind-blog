@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Instalacja Bind | Sysmind Blog</title>
 <meta name="keywords" content="Linux, DNS">
 <meta name="description" content="Instalacja Bind lokalnie">
 <meta name="author" content="Michał Adamczyk">
-<link rel="canonical" href="http://localhost:1313/posts/projects/instalacja_bind/">
+<link rel="canonical" href="/posts/projects/instalacja_bind/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/projects/instalacja_bind/">
+<link rel="alternate" hreflang="en" href="/posts/projects/instalacja_bind/">
 <noscript>
     <style>
         #theme-toggle,
@@ -27,7 +27,69 @@
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="/posts/projects/instalacja_bind/">
+  <meta property="og:site_name" content="Sysmind Blog">
+  <meta property="og:title" content="Instalacja Bind">
+  <meta property="og:description" content="Instalacja Bind lokalnie">
+  <meta property="og:locale" content="pl">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-08T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="DNS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Instalacja Bind">
+<meta name="twitter:description" content="Instalacja Bind lokalnie">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Instalacja Bind",
+      "item": "/posts/projects/instalacja_bind/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Instalacja Bind",
+  "name": "Instalacja Bind",
+  "description": "Instalacja Bind lokalnie",
+  "keywords": [
+    "Linux", "DNS"
+  ],
+  "articleBody": "Przewodnik Konfiguracji Lokalnego Serwera DNS BIND Ten przewodnik pomoże Ci skonfigurować lokalny serwer DNS przy użyciu BIND9 do obsługi własnej domeny (np. mydomain.local) z obsługą rozwiązywania nazw w przód i wstecz.\nWymagania wstępne System Ubuntu/Debian\nDostęp root lub sudo\nPodstawowa znajomość koncepcji DNS\nInstalacja Zaktualizuj system i zainstaluj BIND9:\nsudo apt update sudo apt upgrade -y sudo apt install bind9 bind9utils bind9-doc -y Sprawdź status usługi BIND:\nsudo systemctl status bind9 Konfiguracja 1. Konfiguracja stref lokalnych Edytuj plik konfiguracji lokalnej:\nsudo nano /etc/bind/named.conf.local Dodaj następujące konfiguracje stref:\nzone \"mydomain.local\" { type master; file \"/etc/bind/zones/mydomain.local.zone\"; }; zone \"0.0.127.in-addr.arpa\" { type master; file \"/etc/bind/zones/reverse.local.zone\"; }; 2. Tworzenie plików stref Utwórz katalog na strefy:\nsudo mkdir -p /etc/bind/zones Plik strefy prostej (forward) Utwórz i edytuj plik strefy prostej:\nsudo nano /etc/bind/zones/mydomain.local.zone Dodaj następującą konfigurację:\n$TTL 86400 @ IN SOA ns1.mydomain.local. admin.mydomain.local. ( 2025011401 ; Numer seryjny 3600 ; Odświeżanie 1800 ; Ponawianie 1209600 ; Wygaśnięcie 86400 ) ; Minimalny TTL @ IN NS ns1.mydomain.local. @ IN A 127.0.0.1 ns1 IN A 127.0.0.1 www IN A 127.0.0.1 app IN A 127.0.0.2 Plik strefy odwrotnej (reverse) Utwórz i edytuj plik strefy odwrotnej:\nsudo nano /etc/bind/zones/reverse.local.zone Dodaj następującą konfigurację:\n$TTL 86400 @ IN SOA ns1.mydomain.local. admin.mydomain.local. ( 2025011401 ; Numer seryjny 3600 ; Odświeżanie 1800 ; Ponawianie 1209600 ; Wygaśnięcie 86400 ) ; Minimalny TTL @ IN NS ns1.mydomain.local. 1 IN PTR ns1.mydomain.local. 1 IN PTR www.mydomain.local. 2 IN PTR app.mydomain.local. 3. Konfiguracja opcji BIND Edytuj plik opcji:\nsudo nano /etc/bind/named.conf.options Dodaj następującą konfigurację:\noptions { directory \"/var/cache/bind\"; recursion yes; allow-query { localhost; }; forwarders { 8.8.8.8; // DNS Google 1.1.1.1; // DNS Cloudflare }; dnssec-validation auto; listen-on { 127.0.0.1; }; listen-on-v6 { ::1; }; }; Weryfikacja i testowanie 1. Sprawdź składnię konfiguracji sudo named-checkconf sudo named-checkzone mydomain.local /etc/bind/zones/mydomain.local.zone sudo named-checkzone 0.0.127.in-addr.arpa /etc/bind/zones/reverse.local.zone 2. Zrestartuj usługę BIND sudo systemctl restart bind9 3. Przetestuj rozwiązywanie DNS Test wyszukiwania do przodu:\ndig @127.0.0.1 www.mydomain.local Test wyszukiwania wstecznego:\ndig -x 127.0.0.1 @127.0.0.1 Rozwiązywanie problemów Sprawdź logi BIND: sudo tail -f /var/log/syslog | grep named Sprawdź status usługi: sudo systemctl status bind9 Sprawdź uprawnienia plików stref: sudo ls -l /etc/bind/zones/ Typowe problemy Usługa nie uruchamia się: Sprawdź błędy składni w plikach konfiguracyjnych\nRozwiązywanie DNS nie działa: Sprawdź ustawienia zapory sieciowej i adresy nasłuchiwania BIND\nProblemy z transferem stref: Sprawdź uprawnienia plików i składnię plików stref\nAspekty bezpieczeństwa Ogranicz transfery stref do zaufanych serwerów\nSkonfiguruj odpowiednie listy kontroli dostępu w allow-query\nAktualizuj BIND o najnowsze poprawki bezpieczeństwa\nUżyj DNSSEC dla zwiększonego bezpieczeństwa\nDodatkowe źródła Dokumentacja BIND\nPrzewodnik BIND dla Ubuntu\n",
+  "wordCount" : "419",
+  "inLanguage": "en",
+  "datePublished": "2025-02-08T00:00:00Z",
+  "dateModified": "2025-02-08T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Michał Adamczyk"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/posts/projects/instalacja_bind/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sysmind Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -41,8 +103,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
-                <img src="http://localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+            <a href="/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="/images/sysmind_logo.jpg" alt="" aria-label="logo"
                     height="40">Sysmind Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
@@ -69,12 +131,12 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/posts/about/" title="O Mnie">
+                <a href="/posts/about/" title="O Mnie">
                     <span>O Mnie</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/posts/projects/" title="Projekty">
+                <a href="/posts/projects/" title="Projekty">
                     <span>Projekty</span>
                 </a>
             </li>
@@ -369,15 +431,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
-      <li><a href="http://localhost:1313/tags/dns/">DNS</a></li>
+      <li><a href="/tags/linux/">Linux</a></li>
+      <li><a href="/tags/dns/">DNS</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="http://localhost:1313/">Sysmind Blog</a></span> · 
+        <span>&copy; 2025 <a href="/">Sysmind Blog</a></span> · 
 
     <span>
         Powered by
