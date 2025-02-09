@@ -2,7 +2,7 @@
 
 title = "Wazuh"
 
-date = 2025-02-00
+date = "2025-02-09"
 
 description = "Instalacja Wazuha"
 
