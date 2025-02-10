@@ -1,26 +1,27 @@
-baseURL = "/"                     # Bazowy URL strony
-languageCode = "pl"               # Kod języka
-title = "Sysmind Blog"            # Globalny tytuł strony
-theme = "PaperMod"                # Nazwa motywu
-pagerSize = 10                     # Liczba wpisów na stronę
+baseURL = "/"                     
+languageCode = "pl"               
+defaultContentLanguage = "pl"      # Dodajemy tę linię
+title = "Sysmind Blog"            
+theme = "PaperMod"                
+pagerSize = 10                     
 
 # Parametry motywu
 [params]
-  title = "Sysmind Blog"          # Tytuł strony
-  subtitle = "Blog o technologii, Linuxie i Cybersecurity"  # Podtytuł
-  description = "Dzielę się wiedzą o technologii, Linuxie, cybersecurity i więcej!"  # Opis strony
-  author = "Michał Adamczyk"      # Imię i nazwisko autora
-  keywords = ["Linux", "Cybersecurity", "Technology", "Hugo", "Blog"] # Słowa kluczowe
-  favicon = "/images/favicon.ico" # Ścieżka do favikony
-  defaultTheme = "light"          # Domyślny motyw (light/dark)
-  enableDarkMode = true           # Włącz tryb ciemny
-  showReadingTime = true          # Pokaż czas czytania
-  showTOC = true                  # Włącz tabelę treści
+  title = "Sysmind Blog"          
+  subtitle = "Blog o technologii, Linuxie i Cybersecurity"  
+  description = "Dzielę się wiedzą o technologii, Linuxie, cybersecurity i więcej!"  
+  author = "Michał Adamczyk"      
+  keywords = ["Linux", "Cybersecurity", "Technology", "Hugo", "Blog"]
+  favicon = "/images/favicon.ico"
+  defaultTheme = "light"          
+  enableDarkMode = true           
+  showReadingTime = true          
+  showTOC = true                  
 
   # Logo
   [params.label]
-    icon = "/images/sysmind_logo.jpg" # Ścieżka do logo bloga
-    iconHeight = 40                  # Wysokość logo w pikselach
+    icon = "/images/sysmind_logo.jpg"
+    iconHeight = 40                  
 
   # Social Media
   [params.social]
@@ -31,7 +32,7 @@ pagerSize = 10                     # Liczba wpisów na stronę
 [markup]
   [markup.highlight]
     noClasses = false
-    style = "dracula"             # Styl podświetlania kodu
+    style = "dracula"             
 
 # Wyjścia generowane przez Hugo
 [outputs]

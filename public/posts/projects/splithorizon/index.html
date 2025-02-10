@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pl" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Split-HorizonDNS | Sysmind Blog</title>
+<meta name="keywords" content="Linux, DNS">
+<meta name="description" content="Instalacja Split-Horizon">
+<meta name="author" content="Michał Adamczyk">
+<link rel="canonical" href="//localhost:1313/posts/projects/splithorizon/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="pl" href="//localhost:1313/posts/projects/splithorizon/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="//localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+                    height="40">Sysmind Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/posts/about/" title="O Mnie">
+                    <span>O Mnie</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/projects/" title="Projekty">
+                    <span>Projekty</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Split-HorizonDNS
+    </h1>
+    <div class="post-description">
+      Instalacja Split-Horizon
+    </div>
+    <div class="post-meta"><span title='2025-02-08 00:00:00 +0000 UTC'>lutego 8, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Michał Adamczyk
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Spis treści</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#konfiguracja-split-horizon-dns-na-centosalmalinux" aria-label="Konfiguracja Split-Horizon DNS na CentOS/AlmaLinux">Konfiguracja Split-Horizon DNS na CentOS/AlmaLinux</a><ul>
+                        
+                <li>
+                    <a href="#1-wymagania-wst%c4%99pne" aria-label="1. Wymagania wstępne">1. Wymagania wstępne</a></li>
+                <li>
+                    <a href="#2-instalacja-bind" aria-label="2. Instalacja BIND">2. Instalacja BIND</a></li>
+                <li>
+                    <a href="#3-przygotowanie-plik%c3%b3w-stref" aria-label="3. Przygotowanie plików stref">3. Przygotowanie plików stref</a><ul>
+                        
+                <li>
+                    <a href="#plik-strefy-wewn%c4%99trznej" aria-label="Plik strefy wewnętrznej">Plik strefy wewnętrznej</a></li>
+                <li>
+                    <a href="#plik-strefy-zewn%c4%99trznej" aria-label="Plik strefy zewnętrznej">Plik strefy zewnętrznej</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-konfiguracja-bind" aria-label="4. Konfiguracja BIND">4. Konfiguracja BIND</a><ul>
+                        
+                <li>
+                    <a href="#widok-wewn%c4%99trzny" aria-label="Widok wewnętrzny">Widok wewnętrzny</a></li>
+                <li>
+                    <a href="#widok-zewn%c4%99trzny" aria-label="Widok zewnętrzny">Widok zewnętrzny</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-walidacja-konfiguracji" aria-label="5. Walidacja konfiguracji">5. Walidacja konfiguracji</a></li>
+                <li>
+                    <a href="#6-restart-bind" aria-label="6. Restart BIND">6. Restart BIND</a></li>
+                <li>
+                    <a href="#7-konfiguracja-firewalla" aria-label="7. Konfiguracja firewalla">7. Konfiguracja firewalla</a></li>
+                <li>
+                    <a href="#8-testowanie" aria-label="8. Testowanie">8. Testowanie</a><ul>
+                        
+                <li>
+                    <a href="#test-sieci-wewn%c4%99trznej" aria-label="Test sieci wewnętrznej">Test sieci wewnętrznej</a></li>
+                <li>
+                    <a href="#test-sieci-zewn%c4%99trznej" aria-label="Test sieci zewnętrznej">Test sieci zewnętrznej</a></li></ul>
+                </li>
+                <li>
+                    <a href="#9-opcjonalnie-w%c5%82%c4%85czenie-logowania" aria-label="9. Opcjonalnie: Włączenie logowania">9. Opcjonalnie: Włączenie logowania</a><ul>
+                        
+                <li>
+                    <a href="#dodaj-konfiguracj%c4%99-logowania" aria-label="Dodaj konfigurację logowania">Dodaj konfigurację logowania</a></li>
+                <li>
+                    <a href="#utw%c3%b3rz-plik-log%c3%b3w" aria-label="Utwórz plik logów">Utwórz plik logów</a></li>
+                <li>
+                    <a href="#zrestartuj-bind" aria-label="Zrestartuj BIND">Zrestartuj BIND</a></li>
+                <li>
+                    <a href="#porady-dotycz%c4%85ce-rozwi%c4%85zywania-problem%c3%b3w" aria-label="Porady dotyczące rozwiązywania problemów">Porady dotyczące rozwiązywania problemów</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="konfiguracja-split-horizon-dns-na-centosalmalinux">Konfiguracja Split-Horizon DNS na CentOS/AlmaLinux<a hidden class="anchor" aria-hidden="true" href="#konfiguracja-split-horizon-dns-na-centosalmalinux">#</a></h1>
+<p>Ten poradnik przeprowadzi Cię przez proces konfiguracji Split-Horizon DNS przy użyciu BIND na systemach CentOS lub AlmaLinux. Split-Horizon DNS pozwala serwerowi DNS zwracać różne rekordy w zależności od źródła zapytania (sieć wewnętrzna vs zewnętrzna).</p>
+<h2 id="1-wymagania-wstępne">1. Wymagania wstępne<a hidden class="anchor" aria-hidden="true" href="#1-wymagania-wstępne">#</a></h2>
+<ul>
+<li>CentOS, AlmaLinux lub RedHat z dostępem root lub sudo</li>
+<li>Zainstalowany BIND (<code>bind</code> i <code>bind-utils</code>)</li>
+</ul>
+<h2 id="2-instalacja-bind">2. Instalacja BIND<a hidden class="anchor" aria-hidden="true" href="#2-instalacja-bind">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dnf install <span class="nb">bind</span> bind-utils -y
+</span></span></code></pre></div><h2 id="3-przygotowanie-plików-stref">3. Przygotowanie plików stref<a hidden class="anchor" aria-hidden="true" href="#3-przygotowanie-plików-stref">#</a></h2>
+<p>Utworzenie katalogu stref:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p /etc/named/zones
+</span></span></code></pre></div><h3 id="plik-strefy-wewnętrznej">Plik strefy wewnętrznej<a hidden class="anchor" aria-hidden="true" href="#plik-strefy-wewnętrznej">#</a></h3>
+<p>Utwórz plik <code>/etc/named/zones/internal.example.com.zone</code>:</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">$TTL 86400
+@   IN  SOA   ns1.example.com. admin.example.com. (
+            2025011501 ; Numer seryjny
+            3600       ; Odświeżanie
+            1800       ; Ponawianie
+            1209600    ; Wygaśnięcie
+            86400 )    ; Minimalny TTL
+@   IN  NS    ns1.example.com.
+ns1 IN  A     192.168.1.1
+www IN  A     192.168.1.2
+mail IN  A     192.168.1.3
+</code></pre><h3 id="plik-strefy-zewnętrznej">Plik strefy zewnętrznej<a hidden class="anchor" aria-hidden="true" href="#plik-strefy-zewnętrznej">#</a></h3>
+<p>Utwórz plik <code>/etc/named/zones/external.example.com.zone</code>:</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">$TTL 86400
+@   IN  SOA   ns1.example.com. admin.example.com. (
+            2025011501 ; Numer seryjny
+            3600       ; Odświeżanie
+            1800       ; Ponawianie
+            1209600    ; Wygaśnięcie
+            86400 )    ; Minimalny TTL
+@   IN  NS    ns1.example.com.
+ns1 IN  A     203.0.113.1
+www IN  A     203.0.113.2
+mail IN  A     203.0.113.3
+</code></pre><h2 id="4-konfiguracja-bind">4. Konfiguracja BIND<a hidden class="anchor" aria-hidden="true" href="#4-konfiguracja-bind">#</a></h2>
+<p>Edytuj plik <code>/etc/named.conf</code> aby zdefiniować widoki dla zapytań wewnętrznych i zewnętrznych.</p>
+<h3 id="widok-wewnętrzny">Widok wewnętrzny<a hidden class="anchor" aria-hidden="true" href="#widok-wewnętrzny">#</a></h3>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">view &#34;internal&#34; {
+    match-clients { 192.168.1.0/24; localhost; }; // Sieć wewnętrzna
+    zone &#34;example.com&#34; {
+        type master;
+        file &#34;/etc/named/zones/internal.example.com.zone&#34;;
+    };
+};
+</code></pre><h3 id="widok-zewnętrzny">Widok zewnętrzny<a hidden class="anchor" aria-hidden="true" href="#widok-zewnętrzny">#</a></h3>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">view &#34;external&#34; {
+    match-clients { any; }; // Wszystkie pozostałe źródła
+    zone &#34;example.com&#34; {
+        type master;
+        file &#34;/etc/named/zones/external.example.com.zone&#34;;
+    };
+};
+</code></pre><h2 id="5-walidacja-konfiguracji">5. Walidacja konfiguracji<a hidden class="anchor" aria-hidden="true" href="#5-walidacja-konfiguracji">#</a></h2>
+<p>Sprawdź plik konfiguracyjny:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo named-checkconf
+</span></span></code></pre></div><p>Sprawdź pliki stref:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo named-checkzone example.com /etc/named/zones/internal.example.com.zone
+</span></span><span class="line"><span class="cl">sudo named-checkzone example.com /etc/named/zones/external.example.com.zone
+</span></span></code></pre></div><h2 id="6-restart-bind">6. Restart BIND<a hidden class="anchor" aria-hidden="true" href="#6-restart-bind">#</a></h2>
+<p>Włącz i zrestartuj usługę BIND:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> named
+</span></span><span class="line"><span class="cl">sudo systemctl restart named
+</span></span></code></pre></div><p>Sprawdź status:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status named
+</span></span></code></pre></div><h2 id="7-konfiguracja-firewalla">7. Konfiguracja firewalla<a hidden class="anchor" aria-hidden="true" href="#7-konfiguracja-firewalla">#</a></h2>
+<p>Zezwól na ruch DNS przez firewall:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo firewall-cmd --permanent --add-service<span class="o">=</span>dns
+</span></span><span class="line"><span class="cl">sudo firewall-cmd --reload
+</span></span></code></pre></div><h2 id="8-testowanie">8. Testowanie<a hidden class="anchor" aria-hidden="true" href="#8-testowanie">#</a></h2>
+<h3 id="test-sieci-wewnętrznej">Test sieci wewnętrznej<a hidden class="anchor" aria-hidden="true" href="#test-sieci-wewnętrznej">#</a></h3>
+<p>Uruchom to polecenie z maszyny w sieci wewnętrznej:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dig @localhost www.example.com
+</span></span></code></pre></div><p>Oczekiwany wynik: IP z <code>internal.example.com.zone</code> (np. <code>192.168.1.2</code>)</p>
+<h3 id="test-sieci-zewnętrznej">Test sieci zewnętrznej<a hidden class="anchor" aria-hidden="true" href="#test-sieci-zewnętrznej">#</a></h3>
+<p>Uruchom to polecenie z maszyny zewnętrznej:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dig @&lt;PUBLICZNE_IP_SERWERA_BIND&gt; www.example.com
+</span></span></code></pre></div><p>Oczekiwany wynik: IP z <code>external.example.com.zone</code> (np. <code>203.0.113.2</code>)</p>
+<h2 id="9-opcjonalnie-włączenie-logowania">9. Opcjonalnie: Włączenie logowania<a hidden class="anchor" aria-hidden="true" href="#9-opcjonalnie-włączenie-logowania">#</a></h2>
+<h3 id="dodaj-konfigurację-logowania">Dodaj konfigurację logowania<a hidden class="anchor" aria-hidden="true" href="#dodaj-konfigurację-logowania">#</a></h3>
+<p>Edytuj <code>/etc/named.conf</code> aby dodać logowanie:</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">logging {
+    channel query_log {
+        file &#34;/var/log/named_queries.log&#34;;
+        severity dynamic;
+    };
+    category queries { query_log; };
+};
+</code></pre><h3 id="utwórz-plik-logów">Utwórz plik logów<a hidden class="anchor" aria-hidden="true" href="#utwórz-plik-logów">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo touch /var/log/named_queries.log
+</span></span><span class="line"><span class="cl">sudo chmod <span class="m">640</span> /var/log/named_queries.log
+</span></span><span class="line"><span class="cl">sudo chown named:named /var/log/named_queries.log
+</span></span></code></pre></div><h3 id="zrestartuj-bind">Zrestartuj BIND<a hidden class="anchor" aria-hidden="true" href="#zrestartuj-bind">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart named
+</span></span></code></pre></div><p>Serwer Split-Horizon DNS jest teraz skonfigurowany i gotowy do użycia. W przypadku problemów, sprawdź dokładnie pliki konfiguracyjne i logi w celu rozwiązania problemów.</p>
+<h3 id="porady-dotyczące-rozwiązywania-problemów">Porady dotyczące rozwiązywania problemów<a hidden class="anchor" aria-hidden="true" href="#porady-dotyczące-rozwiązywania-problemów">#</a></h3>
+<ol>
+<li>Sprawdź status usługi BIND używając <code>systemctl status named</code></li>
+<li>Przejrzyj logi systemowe: <code>journalctl -u named</code></li>
+<li>Upewnij się, że porty są otwarte: <code>netstat -tulpn | grep named</code></li>
+<li>Sprawdź uprawnienia do plików konfiguracyjnych</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="//localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="//localhost:1313/tags/dns/">DNS</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:1313/">Sysmind Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
