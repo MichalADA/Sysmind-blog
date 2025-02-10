@@ -51,3 +51,8 @@ pagerSize = 10
     name = "Projekty"
     url = "/posts/projects/"
     weight = 2
+  [[menu.main]]
+    identifier = "publications"
+    name = "Publikacje"
+    url = "/publications/"
+    weight = 3   

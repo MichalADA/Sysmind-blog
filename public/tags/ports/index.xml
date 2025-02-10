@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ports on Sysmind Blog</title>
+    <link>//localhost:1313/tags/ports/</link>
+    <description>Recent content in Ports on Sysmind Blog</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>pl</language>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/ports/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Najczęściej Atakowane Porty Sieciowe - Co Powinieneś Wiedzieć</title>
+      <link>//localhost:1313/publications/najczesciej-atakowane-porty/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/publications/najczesciej-atakowane-porty/</guid>
+      <description>&lt;h1 id=&#34;najczęściej-atakowane-porty-sieciowe---co-powinieneś-wiedzieć&#34;&gt;Najczęściej Atakowane Porty Sieciowe - Co Powinieneś Wiedzieć&lt;/h1&gt;
+&lt;p&gt;Bezpieczeństwo sieciowe jest kluczowym aspektem współczesnej infrastruktury IT. Zrozumienie, które porty są najczęściej atakowane, może pomóc w lepszej ochronie systemów. Przyjrzyjmy się najważniejszym portom, które wymagają szczególnej uwagi.&lt;/p&gt;
+&lt;h2 id=&#34;często-atakowane-porty-i-ich-funkcje&#34;&gt;Często Atakowane Porty i Ich Funkcje&lt;/h2&gt;
+&lt;h3 id=&#34;porty-związane-z-transferem-plików&#34;&gt;Porty Związane z Transferem Plików&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port 21 (FTP)&lt;/strong&gt;: Protokół transferu plików, często atakowany ze względu na przesyłanie danych w formie niezaszyfrowanej&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 69 (TFTP)&lt;/strong&gt;: Trivial File Transfer Protocol, uproszczona wersja FTP bez uwierzytelniania&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;porty-dostępu-zdalnego&#34;&gt;Porty Dostępu Zdalnego&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port 22 (SSH)&lt;/strong&gt;: Secure Shell - mimo że jest bezpieczny, często jest celem ataków brute force&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 23 (Telnet)&lt;/strong&gt;: Niezaszyfrowany protokół dostępu zdalnego, bardzo podatny na ataki&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;porty-komunikacyjne&#34;&gt;Porty Komunikacyjne&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port 25 (SMTP)&lt;/strong&gt;: Simple Mail Transfer Protocol, często wykorzystywany w atakach spamowych&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 53 (DNS)&lt;/strong&gt;: Domain Name System, cel ataków DDoS i zatrucia cache DNS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;porty-webowe&#34;&gt;Porty Webowe&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port 80 (HTTP)&lt;/strong&gt;: Standardowy port WWW&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 443 (HTTPS)&lt;/strong&gt;: Bezpieczna wersja HTTP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 8080&lt;/strong&gt;: Alternatywny port HTTP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 8443&lt;/strong&gt;: Alternatywny port HTTPS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;porty-systemu-windows&#34;&gt;Porty Systemu Windows&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Port 135 (RPC)&lt;/strong&gt;: Windows Remote Procedure Call&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 137-139&lt;/strong&gt;: NetBIOS over TCP/IP, często wykorzystywany w starszych systemach Windows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;jak-się-chronić&#34;&gt;Jak Się Chronić?&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Regularne Audyty Portów&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

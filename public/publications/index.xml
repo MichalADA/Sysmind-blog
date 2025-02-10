@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Publikacje on Sysmind Blog</title>
+    <link>//localhost:1313/publications/</link>
+    <description>Recent content in Publikacje on Sysmind Blog</description>
+    <generator>Hugo -- 0.143.1</generator>
+    <language>pl</language>
+    <lastBuildDate>Mon, 10 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/publications/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Najczęściej Atakowane Porty Sieciowe - Co Powinieneś Wiedzieć</title>
+      <link>//localhost:1313/publications/najczesciej-atakowane-porty/</link>
+      <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/publications/najczesciej-atakowane-porty/</guid>
+      <description>&lt;h1 id=&#34;najczęściej-atakowane-porty-sieciowe---kompleksowy-przewodnik-bezpieczeństwa&#34;&gt;Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa&lt;/h1&gt;
+&lt;h2 id=&#34;wprowadzenie&#34;&gt;Wprowadzenie&lt;/h2&gt;
+&lt;p&gt;Bezpieczeństwo sieciowe stanowi fundament współczesnej infrastruktury IT. W czasach, gdy cyberataki stają się coraz bardziej wyrafinowane, zrozumienie potencjalnych wektorów ataku jest kluczowe dla każdego administratora systemu i specjalisty ds. bezpieczeństwa. W tym kompleksowym przewodniku przyjrzymy się szczegółowo najczęściej atakowanym portom sieciowym, metodom ataków oraz strategiom obrony.&lt;/p&gt;
+&lt;h2 id=&#34;anatomia-ataków-na-porty-sieciowe&#34;&gt;Anatomia Ataków na Porty Sieciowe&lt;/h2&gt;
+&lt;h3 id=&#34;porty-związane-z-transferem-plików&#34;&gt;Porty Związane z Transferem Plików&lt;/h3&gt;
+&lt;h4 id=&#34;port-21-ftp&#34;&gt;Port 21 (FTP)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Charakterystyka&lt;/strong&gt;: Standardowy port dla protokołu FTP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Główne zagrożenia&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Przechwytywanie danych logowania&lt;/li&gt;
+&lt;li&gt;Man-in-the-middle attacks&lt;/li&gt;
+&lt;li&gt;Ataki brute force na hasła&lt;/li&gt;
+&lt;li&gt;Directory traversal attacks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rekomendowane zabezpieczenia&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Migracja na SFTP (Port 22) lub FTPS&lt;/li&gt;
+&lt;li&gt;Implementacja silnych polityk haseł&lt;/li&gt;
+&lt;li&gt;Ograniczenie dostępu do określonych adresów IP&lt;/li&gt;
+&lt;li&gt;Monitoring prób nieudanego logowania&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;port-69-tftp&#34;&gt;Port 69 (TFTP)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Charakterystyka&lt;/strong&gt;: Uproszczony protokół transferu plików&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Zagrożenia&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Brak mechanizmów uwierzytelniania&lt;/li&gt;
+&lt;li&gt;Możliwość nieuprawnionego dostępu do plików&lt;/li&gt;
+&lt;li&gt;Podatność na ataki typu buffer overflow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Zabezpieczenia&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Unikanie używania TFTP w środowisku produkcyjnym&lt;/li&gt;
+&lt;li&gt;Ścisłe ograniczenie dostępu przez firewall&lt;/li&gt;
+&lt;li&gt;Implementacja VLAN dla izolacji ruchu TFTP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;porty-dostępu-zdalnego&#34;&gt;Porty Dostępu Zdalnego&lt;/h3&gt;
+&lt;h4 id=&#34;port-22-ssh&#34;&gt;Port 22 (SSH)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Charakterystyka&lt;/strong&gt;: Podstawowy protokół bezpiecznego dostępu zdalnego&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Typowe wektory ataku&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Ataki brute force&lt;/li&gt;
+&lt;li&gt;Wykorzystanie słabych kluczy SSH&lt;/li&gt;
+&lt;li&gt;Próby exploitacji znanych podatności w implementacjach SSH&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;przykłady-konkretnych-ataków-na-port-22&#34;&gt;Przykłady Konkretnych Ataków na Port 22&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Ataki Zgadywania Hasła SSH&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

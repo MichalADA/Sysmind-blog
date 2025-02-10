@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pl" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Najczęściej Atakowane Porty Sieciowe - Co Powinieneś Wiedzieć | Sysmind Blog</title>
+<meta name="keywords" content="cybersecurity, networking, security, ports">
+<meta name="description" content="Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa
+Wprowadzenie
+Bezpieczeństwo sieciowe stanowi fundament współczesnej infrastruktury IT. W czasach, gdy cyberataki stają się coraz bardziej wyrafinowane, zrozumienie potencjalnych wektorów ataku jest kluczowe dla każdego administratora systemu i specjalisty ds. bezpieczeństwa. W tym kompleksowym przewodniku przyjrzymy się szczegółowo najczęściej atakowanym portom sieciowym, metodom ataków oraz strategiom obrony.
+Anatomia Ataków na Porty Sieciowe
+Porty Związane z Transferem Plików
+Port 21 (FTP)
+
+Charakterystyka: Standardowy port dla protokołu FTP
+Główne zagrożenia:
+
+Przechwytywanie danych logowania
+Man-in-the-middle attacks
+Ataki brute force na hasła
+Directory traversal attacks
+
+
+Rekomendowane zabezpieczenia:
+
+Migracja na SFTP (Port 22) lub FTPS
+Implementacja silnych polityk haseł
+Ograniczenie dostępu do określonych adresów IP
+Monitoring prób nieudanego logowania
+
+
+
+Port 69 (TFTP)
+
+Charakterystyka: Uproszczony protokół transferu plików
+Zagrożenia:
+
+Brak mechanizmów uwierzytelniania
+Możliwość nieuprawnionego dostępu do plików
+Podatność na ataki typu buffer overflow
+
+
+Zabezpieczenia:
+
+Unikanie używania TFTP w środowisku produkcyjnym
+Ścisłe ograniczenie dostępu przez firewall
+Implementacja VLAN dla izolacji ruchu TFTP
+
+
+
+Porty Dostępu Zdalnego
+Port 22 (SSH)
+
+Charakterystyka: Podstawowy protokół bezpiecznego dostępu zdalnego
+Typowe wektory ataku:
+
+Ataki brute force
+Wykorzystanie słabych kluczy SSH
+Próby exploitacji znanych podatności w implementacjach SSH
+
+
+
+Przykłady Konkretnych Ataków na Port 22
+
+
+Ataki Zgadywania Hasła SSH">
+<meta name="author" content="Michał Adamczyk">
+<link rel="canonical" href="//localhost:1313/publications/najczesciej-atakowane-porty/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="pl" href="//localhost:1313/publications/najczesciej-atakowane-porty/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="//localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+                    height="40">Sysmind Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/posts/about/" title="O Mnie">
+                    <span>O Mnie</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/projects/" title="Projekty">
+                    <span>Projekty</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/publications/" title="Publikacje">
+                    <span>Publikacje</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Najczęściej Atakowane Porty Sieciowe - Co Powinieneś Wiedzieć
+    </h1>
+    <div class="post-meta"><span title='2025-02-10 00:00:00 +0000 UTC'>lutego 10, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Michał Adamczyk
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Spis treści</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#najcz%c4%99%c5%9bciej-atakowane-porty-sieciowe---kompleksowy-przewodnik-bezpiecze%c5%84stwa" aria-label="Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa">Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa</a><ul>
+                        
+                <li>
+                    <a href="#wprowadzenie" aria-label="Wprowadzenie">Wprowadzenie</a></li>
+                <li>
+                    <a href="#anatomia-atak%c3%b3w-na-porty-sieciowe" aria-label="Anatomia Ataków na Porty Sieciowe">Anatomia Ataków na Porty Sieciowe</a><ul>
+                        
+                <li>
+                    <a href="#porty-zwi%c4%85zane-z-transferem-plik%c3%b3w" aria-label="Porty Związane z Transferem Plików">Porty Związane z Transferem Plików</a><ul>
+                        
+                <li>
+                    <a href="#port-21-ftp" aria-label="Port 21 (FTP)">Port 21 (FTP)</a></li>
+                <li>
+                    <a href="#port-69-tftp" aria-label="Port 69 (TFTP)">Port 69 (TFTP)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#porty-dost%c4%99pu-zdalnego" aria-label="Porty Dostępu Zdalnego">Porty Dostępu Zdalnego</a><ul>
+                        
+                <li>
+                    <a href="#port-22-ssh" aria-label="Port 22 (SSH)">Port 22 (SSH)</a><ul>
+                        
+                <li>
+                    <a href="#przyk%c5%82ady-konkretnych-atak%c3%b3w-na-port-22" aria-label="Przykłady Konkretnych Ataków na Port 22">Przykłady Konkretnych Ataków na Port 22</a></li></ul>
+                </li>
+                <li>
+                    <a href="#port-23-telnet" aria-label="Port 23 (Telnet)">Port 23 (Telnet)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#porty-komunikacyjne" aria-label="Porty Komunikacyjne">Porty Komunikacyjne</a><ul>
+                        
+                <li>
+                    <a href="#port-25-smtp" aria-label="Port 25 (SMTP)">Port 25 (SMTP)</a></li>
+                <li>
+                    <a href="#port-53-dns" aria-label="Port 53 (DNS)">Port 53 (DNS)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#porty-webowe" aria-label="Porty Webowe">Porty Webowe</a><ul>
+                        
+                <li>
+                    <a href="#port-80-http-i-443-https" aria-label="Port 80 (HTTP) i 443 (HTTPS)">Port 80 (HTTP) i 443 (HTTPS)</a></li>
+                <li>
+                    <a href="#porty-8080-i-8443" aria-label="Porty 8080 i 8443">Porty 8080 i 8443</a></li></ul>
+                </li>
+                <li>
+                    <a href="#porty-systemu-windows" aria-label="Porty Systemu Windows">Porty Systemu Windows</a><ul>
+                        
+                <li>
+                    <a href="#port-135-rpc" aria-label="Port 135 (RPC)">Port 135 (RPC)</a></li>
+                <li>
+                    <a href="#porty-137-139-netbios" aria-label="Porty 137-139 (NetBIOS)">Porty 137-139 (NetBIOS)</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#zaawansowane-strategie-ochrony" aria-label="Zaawansowane Strategie Ochrony">Zaawansowane Strategie Ochrony</a><ul>
+                        
+                <li>
+                    <a href="#1-monitoring-i-analiza-ruchu" aria-label="1. Monitoring i Analiza Ruchu">1. Monitoring i Analiza Ruchu</a></li>
+                <li>
+                    <a href="#2-zarz%c4%85dzanie-podatno%c5%9bciami" aria-label="2. Zarządzanie Podatnościami">2. Zarządzanie Podatnościami</a></li>
+                <li>
+                    <a href="#3-segmentacja-sieci" aria-label="3. Segmentacja Sieci">3. Segmentacja Sieci</a></li>
+                <li>
+                    <a href="#4-incident-response" aria-label="4. Incident Response">4. Incident Response</a></li></ul>
+                </li>
+                <li>
+                    <a href="#najlepsze-praktyki-dla-administrator%c3%b3w" aria-label="Najlepsze Praktyki dla Administratorów">Najlepsze Praktyki dla Administratorów</a><ul>
+                        
+                <li>
+                    <a href="#codzienna-administracja" aria-label="Codzienna Administracja">Codzienna Administracja</a></li>
+                <li>
+                    <a href="#d%c5%82ugoterminowe-planowanie" aria-label="Długoterminowe Planowanie">Długoterminowe Planowanie</a></li></ul>
+                </li>
+                <li>
+                    <a href="#narz%c4%99dzia-i-technologie" aria-label="Narzędzia i Technologie">Narzędzia i Technologie</a><ul>
+                        
+                <li>
+                    <a href="#essential-security-tools" aria-label="Essential Security Tools">Essential Security Tools</a></li></ul>
+                </li>
+                <li>
+                    <a href="#podsumowanie" aria-label="Podsumowanie">Podsumowanie</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="najczęściej-atakowane-porty-sieciowe---kompleksowy-przewodnik-bezpieczeństwa">Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa<a hidden class="anchor" aria-hidden="true" href="#najczęściej-atakowane-porty-sieciowe---kompleksowy-przewodnik-bezpieczeństwa">#</a></h1>
+<h2 id="wprowadzenie">Wprowadzenie<a hidden class="anchor" aria-hidden="true" href="#wprowadzenie">#</a></h2>
+<p>Bezpieczeństwo sieciowe stanowi fundament współczesnej infrastruktury IT. W czasach, gdy cyberataki stają się coraz bardziej wyrafinowane, zrozumienie potencjalnych wektorów ataku jest kluczowe dla każdego administratora systemu i specjalisty ds. bezpieczeństwa. W tym kompleksowym przewodniku przyjrzymy się szczegółowo najczęściej atakowanym portom sieciowym, metodom ataków oraz strategiom obrony.</p>
+<h2 id="anatomia-ataków-na-porty-sieciowe">Anatomia Ataków na Porty Sieciowe<a hidden class="anchor" aria-hidden="true" href="#anatomia-ataków-na-porty-sieciowe">#</a></h2>
+<h3 id="porty-związane-z-transferem-plików">Porty Związane z Transferem Plików<a hidden class="anchor" aria-hidden="true" href="#porty-związane-z-transferem-plików">#</a></h3>
+<h4 id="port-21-ftp">Port 21 (FTP)<a hidden class="anchor" aria-hidden="true" href="#port-21-ftp">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Standardowy port dla protokołu FTP</li>
+<li><strong>Główne zagrożenia</strong>:
+<ul>
+<li>Przechwytywanie danych logowania</li>
+<li>Man-in-the-middle attacks</li>
+<li>Ataki brute force na hasła</li>
+<li>Directory traversal attacks</li>
+</ul>
+</li>
+<li><strong>Rekomendowane zabezpieczenia</strong>:
+<ul>
+<li>Migracja na SFTP (Port 22) lub FTPS</li>
+<li>Implementacja silnych polityk haseł</li>
+<li>Ograniczenie dostępu do określonych adresów IP</li>
+<li>Monitoring prób nieudanego logowania</li>
+</ul>
+</li>
+</ul>
+<h4 id="port-69-tftp">Port 69 (TFTP)<a hidden class="anchor" aria-hidden="true" href="#port-69-tftp">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Uproszczony protokół transferu plików</li>
+<li><strong>Zagrożenia</strong>:
+<ul>
+<li>Brak mechanizmów uwierzytelniania</li>
+<li>Możliwość nieuprawnionego dostępu do plików</li>
+<li>Podatność na ataki typu buffer overflow</li>
+</ul>
+</li>
+<li><strong>Zabezpieczenia</strong>:
+<ul>
+<li>Unikanie używania TFTP w środowisku produkcyjnym</li>
+<li>Ścisłe ograniczenie dostępu przez firewall</li>
+<li>Implementacja VLAN dla izolacji ruchu TFTP</li>
+</ul>
+</li>
+</ul>
+<h3 id="porty-dostępu-zdalnego">Porty Dostępu Zdalnego<a hidden class="anchor" aria-hidden="true" href="#porty-dostępu-zdalnego">#</a></h3>
+<h4 id="port-22-ssh">Port 22 (SSH)<a hidden class="anchor" aria-hidden="true" href="#port-22-ssh">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Podstawowy protokół bezpiecznego dostępu zdalnego</li>
+<li><strong>Typowe wektory ataku</strong>:
+<ul>
+<li>Ataki brute force</li>
+<li>Wykorzystanie słabych kluczy SSH</li>
+<li>Próby exploitacji znanych podatności w implementacjach SSH</li>
+</ul>
+</li>
+</ul>
+<h5 id="przykłady-konkretnych-ataków-na-port-22">Przykłady Konkretnych Ataków na Port 22<a hidden class="anchor" aria-hidden="true" href="#przykłady-konkretnych-ataków-na-port-22">#</a></h5>
+<ul>
+<li>
+<p><strong>Ataki Zgadywania Hasła SSH</strong></p>
+<ul>
+<li>Automatyczne próby logowania z różnymi kombinacjami loginów i haseł</li>
+<li>Wykorzystanie słowników popularnych haseł</li>
+<li>Ataki distributed brute force z wielu adresów IP</li>
+<li>Skuteczna obrona poprzez implementację logowania kluczem i fail2ban</li>
+</ul>
+</li>
+<li>
+<p><strong>Symulowane Ataki Penetracyjne</strong></p>
+<ul>
+<li>Skanowanie portu 22 w poszukiwaniu otwartych usług SSH</li>
+<li>Identyfikacja wersji oprogramowania SSH</li>
+<li>Próby wykorzystania znanych podatności</li>
+<li>Testowanie odporności na różne techniki ataków</li>
+</ul>
+</li>
+<li>
+<p><strong>Ataki na SFTP</strong></p>
+<ul>
+<li>Próby nieautoryzowanego dostępu do systemu plików</li>
+<li>Ataki na mechanizmy uwierzytelniania SFTP</li>
+<li>Exploitacja błędów w implementacji protokołu</li>
+<li>Próby przechwycenia sesji SFTP</li>
+</ul>
+</li>
+<li>
+<p><strong>Ataki z Wykorzystaniem Port Knocking</strong></p>
+<ul>
+<li>Próby odkrycia sekwencji port knocking</li>
+<li>Monitorowanie i przechwytywanie ruchu sieciowego</li>
+<li>Ataki replay na zidentyfikowane sekwencje</li>
+<li>Exploitacja błędnych implementacji port knocking</li>
+</ul>
+</li>
+<li>
+<p><strong>Zaawansowane zabezpieczenia</strong>:</p>
+<ul>
+<li>Implementacja fail2ban</li>
+<li>Wykorzystanie kluczy SSH zamiast haseł</li>
+<li>Regularna rotacja kluczy</li>
+<li>Monitoring nietypowych wzorców dostępu</li>
+<li>Ograniczenie listy dozwolonych algorytmów szyfrowania</li>
+</ul>
+</li>
+</ul>
+<h4 id="port-23-telnet">Port 23 (Telnet)<a hidden class="anchor" aria-hidden="true" href="#port-23-telnet">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Przestarzały protokół dostępu zdalnego</li>
+<li><strong>Krytyczne zagrożenia</strong>:
+<ul>
+<li>Brak szyfrowania komunikacji</li>
+<li>Podatność na podsłuchiwanie</li>
+<li>Łatwość przechwycenia danych uwierzytelniających</li>
+</ul>
+</li>
+<li><strong>Zalecenia bezpieczeństwa</strong>:
+<ul>
+<li>Całkowite wyłączenie usługi Telnet</li>
+<li>Migracja na SSH</li>
+<li>Wdrożenie polityk bezpieczeństwa zabraniających używania Telnet</li>
+</ul>
+</li>
+</ul>
+<h3 id="porty-komunikacyjne">Porty Komunikacyjne<a hidden class="anchor" aria-hidden="true" href="#porty-komunikacyjne">#</a></h3>
+<h4 id="port-25-smtp">Port 25 (SMTP)<a hidden class="anchor" aria-hidden="true" href="#port-25-smtp">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Podstawowy port dla przesyłania poczty e-mail</li>
+<li><strong>Współczesne zagrożenia</strong>:
+<ul>
+<li>Spam relay</li>
+<li>Email spoofing</li>
+<li>Ataki typu backscatter</li>
+<li>Malware distribution</li>
+</ul>
+</li>
+<li><strong>Zaawansowana ochrona</strong>:
+<ul>
+<li>Implementacja SPF, DKIM i DMARC</li>
+<li>Filtrowanie ruchu SMTP</li>
+<li>Monitoring reputacji IP</li>
+<li>Wdrożenie systemu anty-spamowego</li>
+<li>Regularne audyty logów SMTP</li>
+</ul>
+</li>
+</ul>
+<h4 id="port-53-dns">Port 53 (DNS)<a hidden class="anchor" aria-hidden="true" href="#port-53-dns">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Kluczowy port dla resolucji nazw domenowych</li>
+<li><strong>Współczesne metody ataków</strong>:
+<ul>
+<li>DNS cache poisoning</li>
+<li>DNS amplification attacks</li>
+<li>DNS tunneling</li>
+<li>Fast-flux DNS</li>
+</ul>
+</li>
+<li><strong>Kompleksowa ochrona</strong>:
+<ul>
+<li>Implementacja DNSSEC</li>
+<li>Monitoring anomalii w ruchu DNS</li>
+<li>Rate limiting zapytań DNS</li>
+<li>Separacja serwerów rekurencyjnych i autorytatywnych</li>
+<li>Regularne aktualizacje oprogramowania DNS</li>
+</ul>
+</li>
+</ul>
+<h3 id="porty-webowe">Porty Webowe<a hidden class="anchor" aria-hidden="true" href="#porty-webowe">#</a></h3>
+<h4 id="port-80-http-i-443-https">Port 80 (HTTP) i 443 (HTTPS)<a hidden class="anchor" aria-hidden="true" href="#port-80-http-i-443-https">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Standardowe porty dla ruchu webowego</li>
+<li><strong>Zaawansowane wektory ataków</strong>:
+<ul>
+<li>SQL Injection</li>
+<li>Cross-Site Scripting (XSS)</li>
+<li>DDoS attacks</li>
+<li>SSL/TLS vulnerabilities</li>
+<li>Web application vulnerabilities</li>
+</ul>
+</li>
+<li><strong>Wielowarstwowa ochrona</strong>:
+<ul>
+<li>Implementacja WAF (Web Application Firewall)</li>
+<li>Automatyczne przekierowanie HTTP na HTTPS</li>
+<li>Regularne testy penetracyjne</li>
+<li>Content Security Policy (CSP)</li>
+<li>Monitoring ruchu w czasie rzeczywistym</li>
+</ul>
+</li>
+</ul>
+<h4 id="porty-8080-i-8443">Porty 8080 i 8443<a hidden class="anchor" aria-hidden="true" href="#porty-8080-i-8443">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Alternatywne porty dla serwerów WWW</li>
+<li><strong>Specyficzne zagrożenia</strong>:
+<ul>
+<li>Backdoor attempts</li>
+<li>Proxy abuse</li>
+<li>Service exploitation</li>
+</ul>
+</li>
+<li><strong>Dedykowane zabezpieczenia</strong>:
+<ul>
+<li>Strict access control</li>
+<li>SSL/TLS encryption</li>
+<li>Regular security audits</li>
+<li>Traffic anomaly detection</li>
+</ul>
+</li>
+</ul>
+<h3 id="porty-systemu-windows">Porty Systemu Windows<a hidden class="anchor" aria-hidden="true" href="#porty-systemu-windows">#</a></h3>
+<h4 id="port-135-rpc">Port 135 (RPC)<a hidden class="anchor" aria-hidden="true" href="#port-135-rpc">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Windows Remote Procedure Call</li>
+<li><strong>Typowe ataki</strong>:
+<ul>
+<li>Buffer overflow exploits</li>
+<li>Remote code execution</li>
+<li>Service enumeration</li>
+</ul>
+</li>
+<li><strong>Specjalistyczne zabezpieczenia</strong>:
+<ul>
+<li>Ścisła kontrola dostępu</li>
+<li>Monitoring aktywności RPC</li>
+<li>Regularne patche bezpieczeństwa</li>
+<li>Segmentacja sieci</li>
+</ul>
+</li>
+</ul>
+<h4 id="porty-137-139-netbios">Porty 137-139 (NetBIOS)<a hidden class="anchor" aria-hidden="true" href="#porty-137-139-netbios">#</a></h4>
+<ul>
+<li><strong>Charakterystyka</strong>: Legacy Windows networking</li>
+<li><strong>Zagrożenia</strong>:
+<ul>
+<li>Information leakage</li>
+<li>Network enumeration</li>
+<li>SMB attacks</li>
+</ul>
+</li>
+<li><strong>Rekomendowane działania</strong>:
+<ul>
+<li>Disable if not needed</li>
+<li>Strict firewall rules</li>
+<li>Regular security assessments</li>
+<li>Network segmentation</li>
+</ul>
+</li>
+</ul>
+<h2 id="zaawansowane-strategie-ochrony">Zaawansowane Strategie Ochrony<a hidden class="anchor" aria-hidden="true" href="#zaawansowane-strategie-ochrony">#</a></h2>
+<h3 id="1-monitoring-i-analiza-ruchu">1. Monitoring i Analiza Ruchu<a hidden class="anchor" aria-hidden="true" href="#1-monitoring-i-analiza-ruchu">#</a></h3>
+<ul>
+<li>Implementacja systemów IDS/IPS</li>
+<li>Analiza behawioralna ruchu sieciowego</li>
+<li>Machine learning dla detekcji anomalii</li>
+<li>Regularne audyty bezpieczeństwa</li>
+<li>Monitoring w czasie rzeczywistym</li>
+</ul>
+<h3 id="2-zarządzanie-podatnościami">2. Zarządzanie Podatnościami<a hidden class="anchor" aria-hidden="true" href="#2-zarządzanie-podatnościami">#</a></h3>
+<ul>
+<li>Regularne skanowanie portów</li>
+<li>Vulnerability assessment</li>
+<li>Patch management</li>
+<li>Configuration management</li>
+<li>Risk assessment</li>
+</ul>
+<h3 id="3-segmentacja-sieci">3. Segmentacja Sieci<a hidden class="anchor" aria-hidden="true" href="#3-segmentacja-sieci">#</a></h3>
+<ul>
+<li>Implementacja VLAN</li>
+<li>Network zoning</li>
+<li>Micro-segmentation</li>
+<li>Zero trust architecture</li>
+<li>Access control lists</li>
+</ul>
+<h3 id="4-incident-response">4. Incident Response<a hidden class="anchor" aria-hidden="true" href="#4-incident-response">#</a></h3>
+<ul>
+<li>Przygotowanie planów reakcji</li>
+<li>Zespół reagowania na incydenty</li>
+<li>Procedury eskalacji</li>
+<li>Dokumentacja incydentów</li>
+<li>Lessons learned process</li>
+</ul>
+<h2 id="najlepsze-praktyki-dla-administratorów">Najlepsze Praktyki dla Administratorów<a hidden class="anchor" aria-hidden="true" href="#najlepsze-praktyki-dla-administratorów">#</a></h2>
+<h3 id="codzienna-administracja">Codzienna Administracja<a hidden class="anchor" aria-hidden="true" href="#codzienna-administracja">#</a></h3>
+<ol>
+<li>
+<p><strong>Monitoring Systemu</strong></p>
+<ul>
+<li>Regularne sprawdzanie logów</li>
+<li>Analiza wzorców ruchu</li>
+<li>Weryfikacja uprawnień</li>
+<li>Kontrola dostępu</li>
+</ul>
+</li>
+<li>
+<p><strong>Zarządzanie Konfiguracją</strong></p>
+<ul>
+<li>Dokumentacja zmian</li>
+<li>Version control</li>
+<li>Change management</li>
+<li>Configuration backups</li>
+</ul>
+</li>
+<li>
+<p><strong>Aktualizacje i Patche</strong></p>
+<ul>
+<li>Regular updates</li>
+<li>Security patches</li>
+<li>Firmware updates</li>
+<li>Testing procedures</li>
+</ul>
+</li>
+</ol>
+<h3 id="długoterminowe-planowanie">Długoterminowe Planowanie<a hidden class="anchor" aria-hidden="true" href="#długoterminowe-planowanie">#</a></h3>
+<ol>
+<li>
+<p><strong>Strategia Bezpieczeństwa</strong></p>
+<ul>
+<li>Risk assessment</li>
+<li>Security roadmap</li>
+<li>Budget planning</li>
+<li>Training programs</li>
+</ul>
+</li>
+<li>
+<p><strong>Disaster Recovery</strong></p>
+<ul>
+<li>Backup procedures</li>
+<li>Recovery testing</li>
+<li>Business continuity</li>
+<li>Emergency protocols</li>
+</ul>
+</li>
+</ol>
+<h2 id="narzędzia-i-technologie">Narzędzia i Technologie<a hidden class="anchor" aria-hidden="true" href="#narzędzia-i-technologie">#</a></h2>
+<h3 id="essential-security-tools">Essential Security Tools<a hidden class="anchor" aria-hidden="true" href="#essential-security-tools">#</a></h3>
+<ol>
+<li>
+<p><strong>Network Monitoring</strong></p>
+<ul>
+<li>Wireshark</li>
+<li>Nagios</li>
+<li>PRTG</li>
+<li>Zabbix</li>
+</ul>
+</li>
+<li>
+<p><strong>Security Testing</strong></p>
+<ul>
+<li>Nmap</li>
+<li>Metasploit</li>
+<li>Nessus</li>
+<li>OpenVAS</li>
+</ul>
+</li>
+<li>
+<p><strong>Log Management</strong></p>
+<ul>
+<li>ELK Stack</li>
+<li>Splunk</li>
+<li>Graylog</li>
+<li>Logstash</li>
+</ul>
+</li>
+</ol>
+<h2 id="podsumowanie">Podsumowanie<a hidden class="anchor" aria-hidden="true" href="#podsumowanie">#</a></h2>
+<p>Bezpieczeństwo portów sieciowych wymaga kompleksowego podejścia, łączącego:</p>
+<ul>
+<li>Zrozumienie zagrożeń</li>
+<li>Implementację zabezpieczeń</li>
+<li>Regularne audyty</li>
+<li>Monitoring i reakcję na incydenty</li>
+<li>Ciągłe doskonalenie procedur</li>
+</ul>
+<p>Pamiętaj, że bezpieczeństwo to proces, nie produkt. Wymaga ciągłej uwagi, aktualizacji i dostosowywania do nowych zagrożeń.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="//localhost:1313/tags/cybersecurity/">Cybersecurity</a></li>
+      <li><a href="//localhost:1313/tags/networking/">Networking</a></li>
+      <li><a href="//localhost:1313/tags/security/">Security</a></li>
+      <li><a href="//localhost:1313/tags/ports/">Ports</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:1313/">Sysmind Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

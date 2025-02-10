@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pl" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>SElinux-Wprowadzenie | Sysmind Blog</title>
+<meta name="keywords" content="Linux, Cybersecurity">
+<meta name="description" content="Podstawy SElinuxa">
+<meta name="author" content="Michał Adamczyk">
+<link rel="canonical" href="//localhost:1313/posts/projects/selinux/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="pl" href="//localhost:1313/posts/projects/selinux/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="//localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+                    height="40">Sysmind Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/posts/about/" title="O Mnie">
+                    <span>O Mnie</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/projects/" title="Projekty">
+                    <span>Projekty</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/publications/" title="Publikacje">
+                    <span>Publikacje</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      SElinux-Wprowadzenie
+    </h1>
+    <div class="post-description">
+      Podstawy SElinuxa
+    </div>
+    <div class="post-meta"><span title='2025-02-09 00:00:00 +0000 UTC'>lutego 9, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Michał Adamczyk
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Spis treści</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#selinux---kompleksowy-przewodnik" aria-label="SELinux - Kompleksowy przewodnik">SELinux - Kompleksowy przewodnik</a><ul>
+                        
+                <li>
+                    <a href="#spis-tre%c5%9bci" aria-label="Spis treści">Spis treści</a></li>
+                <li>
+                    <a href="#wprowadzenie-do-selinux" aria-label="Wprowadzenie do SELinux">Wprowadzenie do SELinux</a><ul>
+                        
+                <li>
+                    <a href="#g%c5%82%c3%b3wne-cechy" aria-label="Główne cechy:">Główne cechy:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#architektura-selinux" aria-label="Architektura SELinux">Architektura SELinux</a><ul>
+                        
+                <li>
+                    <a href="#komponenty" aria-label="Komponenty:">Komponenty:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#tryby-pracy" aria-label="Tryby pracy">Tryby pracy</a><ul>
+                        
+                <li>
+                    <a href="#1-enforcing" aria-label="1. Enforcing">1. Enforcing</a></li>
+                <li>
+                    <a href="#2-permissive" aria-label="2. Permissive">2. Permissive</a></li>
+                <li>
+                    <a href="#3-disabled" aria-label="3. Disabled">3. Disabled</a></li></ul>
+                </li>
+                <li>
+                    <a href="#konteksty-bezpiecze%c5%84stwa" aria-label="Konteksty bezpieczeństwa">Konteksty bezpieczeństwa</a><ul>
+                        
+                <li>
+                    <a href="#format-kontekstu" aria-label="Format kontekstu:">Format kontekstu:</a></li>
+                <li>
+                    <a href="#zarz%c4%85dzanie-kontekstami" aria-label="Zarządzanie kontekstami:">Zarządzanie kontekstami:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#polityki-selinux" aria-label="Polityki SELinux">Polityki SELinux</a><ul>
+                        
+                <li>
+                    <a href="#targeted-domy%c5%9blna" aria-label="Targeted (domyślna)">Targeted (domyślna)</a></li>
+                <li>
+                    <a href="#mls-multi-level-security" aria-label="MLS (Multi-Level Security)">MLS (Multi-Level Security)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#podstawowe-komendy" aria-label="Podstawowe komendy">Podstawowe komendy</a><ul>
+                        
+                <li>
+                    <a href="#sprawdzanie-statusu-i-konfiguracji" aria-label="Sprawdzanie statusu i konfiguracji:">Sprawdzanie statusu i konfiguracji:</a></li>
+                <li>
+                    <a href="#zarz%c4%85dzanie-kontekstami-1" aria-label="Zarządzanie kontekstami:">Zarządzanie kontekstami:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#booleany" aria-label="Booleany">Booleany</a><ul>
+                        
+                <li>
+                    <a href="#popularne-booleany" aria-label="Popularne booleany:">Popularne booleany:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#rozwi%c4%85zywanie-problem%c3%b3w" aria-label="Rozwiązywanie problemów">Rozwiązywanie problemów</a><ul>
+                        
+                <li>
+                    <a href="#analiza-log%c3%b3w" aria-label="Analiza logów:">Analiza logów:</a></li>
+                <li>
+                    <a href="#typowe-problemy" aria-label="Typowe problemy:">Typowe problemy:</a></li>
+                <li>
+                    <a href="#rozwi%c4%85zywanie" aria-label="Rozwiązywanie:">Rozwiązywanie:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#najlepsze-praktyki" aria-label="Najlepsze praktyki">Najlepsze praktyki</a><ul>
+                        
+                <li>
+                    <a href="#przyk%c5%82adowa-automatyzacja" aria-label="Przykładowa automatyzacja:">Przykładowa automatyzacja:</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="selinux---kompleksowy-przewodnik">SELinux - Kompleksowy przewodnik<a hidden class="anchor" aria-hidden="true" href="#selinux---kompleksowy-przewodnik">#</a></h1>
+<h2 id="spis-treści">Spis treści<a hidden class="anchor" aria-hidden="true" href="#spis-treści">#</a></h2>
+<ul>
+<li><a href="#wprowadzenie-do-selinux">Wprowadzenie do SELinux</a></li>
+<li><a href="#architektura-selinux">Architektura SELinux</a></li>
+<li><a href="#tryby-pracy">Tryby pracy</a></li>
+<li><a href="#konteksty-bezpiecze%C5%84stwa">Konteksty bezpieczeństwa</a></li>
+<li><a href="#polityki-selinux">Polityki SELinux</a></li>
+<li><a href="#podstawowe-komendy">Podstawowe komendy</a></li>
+<li><a href="#booleany">Booleany</a></li>
+<li><a href="#rozwi%C4%85zywanie-problem%C3%B3w">Rozwiązywanie problemów</a></li>
+<li><a href="#najlepsze-praktyki">Najlepsze praktyki</a></li>
+</ul>
+<h2 id="wprowadzenie-do-selinux">Wprowadzenie do SELinux<a hidden class="anchor" aria-hidden="true" href="#wprowadzenie-do-selinux">#</a></h2>
+<p>Security-Enhanced Linux (SELinux) to zaawansowany system kontroli dostępu (MAC - Mandatory Access Control) zaimplementowany w jądrze Linux. Został pierwotnie opracowany przez NSA i później zintegrowany z wieloma dystrybucjami Linux.</p>
+<h3 id="główne-cechy">Główne cechy:<a hidden class="anchor" aria-hidden="true" href="#główne-cechy">#</a></h3>
+<ul>
+<li>Kontrola dostępu na poziomie jądra systemu</li>
+<li>Szczegółowa polityka bezpieczeństwa</li>
+<li>Ochrona przed eskalacją uprawnień</li>
+<li>Izolacja procesów i usług</li>
+<li>Minimalizacja potencjalnych zagrożeń</li>
+</ul>
+<h2 id="architektura-selinux">Architektura SELinux<a hidden class="anchor" aria-hidden="true" href="#architektura-selinux">#</a></h2>
+<p>SELinux działa na zasadzie etykietowania (labeling) wszystkich obiektów w systemie i kontrolowania dostępu między nimi na podstawie zdefiniowanych reguł.</p>
+<h3 id="komponenty">Komponenty:<a hidden class="anchor" aria-hidden="true" href="#komponenty">#</a></h3>
+<ul>
+<li>Kernel SELinux</li>
+<li>Polityki bezpieczeństwa</li>
+<li>Narzędzia użytkownika</li>
+<li>System logowania</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdzenie czy SELinux jest zainstalowany</span>
+</span></span><span class="line"><span class="cl">rpm -qa <span class="p">|</span> grep selinux
+</span></span></code></pre></div><h2 id="tryby-pracy">Tryby pracy<a hidden class="anchor" aria-hidden="true" href="#tryby-pracy">#</a></h2>
+<p>SELinux może działać w trzech trybach, które określają jak system reaguje na naruszenia polityki.</p>
+<h3 id="1-enforcing">1. Enforcing<a hidden class="anchor" aria-hidden="true" href="#1-enforcing">#</a></h3>
+<ul>
+<li>Polityka jest aktywnie egzekwowana</li>
+<li>Naruszenia są blokowane i logowane</li>
+<li>Zalecany w środowisku produkcyjnym</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Włączenie trybu Enforcing</span>
+</span></span><span class="line"><span class="cl">sudo setenforce <span class="m">1</span>
+</span></span></code></pre></div><h3 id="2-permissive">2. Permissive<a hidden class="anchor" aria-hidden="true" href="#2-permissive">#</a></h3>
+<ul>
+<li>Polityka nie jest egzekwowana</li>
+<li>Naruszenia są tylko logowane</li>
+<li>Przydatny do debugowania i testowania</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Włączenie trybu Permissive</span>
+</span></span><span class="line"><span class="cl">sudo setenforce <span class="m">0</span>
+</span></span></code></pre></div><h3 id="3-disabled">3. Disabled<a hidden class="anchor" aria-hidden="true" href="#3-disabled">#</a></h3>
+<ul>
+<li>SELinux jest całkowicie wyłączony</li>
+<li>Brak kontroli dostępu</li>
+<li>Niezalecany w produkcji</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdzenie aktualnego trybu</span>
+</span></span><span class="line"><span class="cl">sestatus
+</span></span></code></pre></div><h2 id="konteksty-bezpieczeństwa">Konteksty bezpieczeństwa<a hidden class="anchor" aria-hidden="true" href="#konteksty-bezpieczeństwa">#</a></h2>
+<p>Każdy obiekt w systemie (pliki, procesy, porty) posiada kontekst bezpieczeństwa składający się z czterech elementów:</p>
+<h3 id="format-kontekstu">Format kontekstu:<a hidden class="anchor" aria-hidden="true" href="#format-kontekstu">#</a></h3>
+<pre tabindex="0"><code>user:role:type:level
+</code></pre><ul>
+<li><strong>user</strong>: Tożsamość SELinux</li>
+<li><strong>role</strong>: Przypisana rola w systemie</li>
+<li><strong>type</strong>: Typ obiektu lub domeny</li>
+<li><strong>level</strong>: Poziom bezpieczeństwa (używany w MLS)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdzenie kontekstu pliku</span>
+</span></span><span class="line"><span class="cl">ls -Z /ścieżka/do/pliku
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sprawdzenie kontekstu procesu</span>
+</span></span><span class="line"><span class="cl">ps auxZ <span class="p">|</span> grep httpd
+</span></span></code></pre></div><h3 id="zarządzanie-kontekstami">Zarządzanie kontekstami:<a hidden class="anchor" aria-hidden="true" href="#zarządzanie-kontekstami">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Zmiana kontekstu pliku</span>
+</span></span><span class="line"><span class="cl">sudo chcon -t httpd_sys_content_t /var/www/html/index.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Przywrócenie domyślnego kontekstu</span>
+</span></span><span class="line"><span class="cl">sudo restorecon -Rv /var/www/html/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dodanie reguły trwałej</span>
+</span></span><span class="line"><span class="cl">sudo semanage fcontext -a -t httpd_sys_content_t <span class="s2">&#34;/var/www/custom(/.*)?&#34;</span>
+</span></span></code></pre></div><h2 id="polityki-selinux">Polityki SELinux<a hidden class="anchor" aria-hidden="true" href="#polityki-selinux">#</a></h2>
+<p>SELinux oferuje różne typy polityk dostosowane do różnych przypadków użycia.</p>
+<h3 id="targeted-domyślna">Targeted (domyślna)<a hidden class="anchor" aria-hidden="true" href="#targeted-domyślna">#</a></h3>
+<ul>
+<li>Chroni tylko wybrane usługi systemowe</li>
+<li>Najprostsza w konfiguracji</li>
+<li>Zalecana dla większości przypadków</li>
+</ul>
+<h3 id="mls-multi-level-security">MLS (Multi-Level Security)<a hidden class="anchor" aria-hidden="true" href="#mls-multi-level-security">#</a></h3>
+<ul>
+<li>Zaawansowana kontrola dostępu</li>
+<li>Używana w środowiskach o wysokich wymaganiach bezpieczeństwa</li>
+<li>Wymaga szczegółowej konfiguracji</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdzenie aktywnej polityki</span>
+</span></span><span class="line"><span class="cl">sestatus <span class="p">|</span> grep <span class="s2">&#34;Loaded policy&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Lista dostępnych polityk</span>
+</span></span><span class="line"><span class="cl">semodule -l
+</span></span></code></pre></div><h2 id="podstawowe-komendy">Podstawowe komendy<a hidden class="anchor" aria-hidden="true" href="#podstawowe-komendy">#</a></h2>
+<h3 id="sprawdzanie-statusu-i-konfiguracji">Sprawdzanie statusu i konfiguracji:<a hidden class="anchor" aria-hidden="true" href="#sprawdzanie-statusu-i-konfiguracji">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Status SELinux</span>
+</span></span><span class="line"><span class="cl">sestatus
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Aktywne porty</span>
+</span></span><span class="line"><span class="cl">semanage port -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Lista modułów polityki</span>
+</span></span><span class="line"><span class="cl">semodule -l
+</span></span></code></pre></div><h3 id="zarządzanie-kontekstami-1">Zarządzanie kontekstami:<a hidden class="anchor" aria-hidden="true" href="#zarządzanie-kontekstami-1">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Zmiana kontekstu</span>
+</span></span><span class="line"><span class="cl">chcon -t httpd_sys_content_t plik.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Przywracanie domyślnych kontekstów</span>
+</span></span><span class="line"><span class="cl">restorecon -Rv /ścieżka
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dodawanie reguł trwałych</span>
+</span></span><span class="line"><span class="cl">semanage fcontext -a -t httpd_sys_content_t <span class="s2">&#34;/custom/path(/.*)?&#34;</span>
+</span></span></code></pre></div><h2 id="booleany">Booleany<a hidden class="anchor" aria-hidden="true" href="#booleany">#</a></h2>
+<p>Booleany to przełączniki umożliwiające szybką modyfikację zachowania polityki SELinux.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Lista wszystkich booleanów</span>
+</span></span><span class="line"><span class="cl">getsebool -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sprawdzenie konkretnego booleana</span>
+</span></span><span class="line"><span class="cl">getsebool httpd_enable_homedirs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Włączenie booleana (tymczasowo)</span>
+</span></span><span class="line"><span class="cl">setsebool httpd_enable_homedirs on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Włączenie booleana (trwale)</span>
+</span></span><span class="line"><span class="cl">setsebool -P httpd_enable_homedirs on
+</span></span></code></pre></div><h3 id="popularne-booleany">Popularne booleany:<a hidden class="anchor" aria-hidden="true" href="#popularne-booleany">#</a></h3>
+<ul>
+<li><code>httpd_enable_homedirs</code>: Dostęp Apache do katalogów domowych</li>
+<li><code>ftpd_anon_write</code>: Zapis przez anonimowego FTP</li>
+<li><code>httpd_can_network_connect</code>: Połączenia sieciowe dla Apache</li>
+</ul>
+<h2 id="rozwiązywanie-problemów">Rozwiązywanie problemów<a hidden class="anchor" aria-hidden="true" href="#rozwiązywanie-problemów">#</a></h2>
+<h3 id="analiza-logów">Analiza logów:<a hidden class="anchor" aria-hidden="true" href="#analiza-logów">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Przeszukiwanie logów audytu</span>
+</span></span><span class="line"><span class="cl">ausearch -m AVC -ts recent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Analiza naruszeń</span>
+</span></span><span class="line"><span class="cl">audit2why &lt; /var/log/audit/audit.log
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Generowanie modułu polityki</span>
+</span></span><span class="line"><span class="cl">audit2allow -a -M mymodule
+</span></span></code></pre></div><h3 id="typowe-problemy">Typowe problemy:<a hidden class="anchor" aria-hidden="true" href="#typowe-problemy">#</a></h3>
+<ol>
+<li>Nieprawidłowe konteksty plików</li>
+<li>Brakujące porty w polityce</li>
+<li>Wymagane booleany są wyłączone</li>
+<li>Konflikty z innymi mechanizmami bezpieczeństwa</li>
+</ol>
+<h3 id="rozwiązywanie">Rozwiązywanie:<a hidden class="anchor" aria-hidden="true" href="#rozwiązywanie">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdzenie kontekstów</span>
+</span></span><span class="line"><span class="cl">ls -Z
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dodanie portu</span>
+</span></span><span class="line"><span class="cl">semanage port -a -t http_port_t -p tcp <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Włączenie wymaganego booleana</span>
+</span></span><span class="line"><span class="cl">setsebool -P httpd_can_network_connect on
+</span></span></code></pre></div><h2 id="najlepsze-praktyki">Najlepsze praktyki<a hidden class="anchor" aria-hidden="true" href="#najlepsze-praktyki">#</a></h2>
+<ol>
+<li>
+<p><strong>Używaj trybu Enforcing</strong></p>
+<ul>
+<li>Zawsze w środowisku produkcyjnym</li>
+<li>Permissive tylko do debugowania</li>
+</ul>
+</li>
+<li>
+<p><strong>Regularnie monitoruj logi</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ausearch -m AVC -ts recent
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Twórz własne moduły polityki</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">audit2allow -a -M custom_policy
+</span></span><span class="line"><span class="cl">semodule -i custom_policy.pp
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Dokumentuj zmiany</strong></p>
+<ul>
+<li>Zapisuj wszystkie modyfikacje kontekstów</li>
+<li>Przechowuj listę własnych modułów polityki</li>
+</ul>
+</li>
+<li>
+<p><strong>Automatyzuj zarządzanie</strong></p>
+<ul>
+<li>Używaj narzędzi do zarządzania konfiguracją</li>
+<li>Twórz skrypty do typowych operacji</li>
+</ul>
+</li>
+<li>
+<p><strong>Regularne aktualizacje</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Aktualizacja polityk</span>
+</span></span><span class="line"><span class="cl">yum update selinux-policy
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="przykładowa-automatyzacja">Przykładowa automatyzacja:<a hidden class="anchor" aria-hidden="true" href="#przykładowa-automatyzacja">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># Skrypt do konfiguracji kontekstów dla nowej aplikacji web</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Ustawienie kontekstów</span>
+</span></span><span class="line"><span class="cl">semanage fcontext -a -t httpd_sys_content_t <span class="s2">&#34;/var/www/app(/.*)?&#34;</span>
+</span></span><span class="line"><span class="cl">restorecon -Rv /var/www/app
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Włączenie wymaganych booleanów</span>
+</span></span><span class="line"><span class="cl">setsebool -P httpd_can_network_connect on
+</span></span><span class="line"><span class="cl">setsebool -P httpd_can_network_connect_db on
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sprawdzenie konfiguracji</span>
+</span></span><span class="line"><span class="cl">sestatus
+</span></span><span class="line"><span class="cl">getsebool -a <span class="p">|</span> grep httpd
+</span></span><span class="line"><span class="cl">ls -Z /var/www/app
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="//localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="//localhost:1313/tags/cybersecurity/">Cybersecurity</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:1313/">Sysmind Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

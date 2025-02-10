@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pl" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Wazuh | Sysmind Blog</title>
+<meta name="keywords" content="Linux, Cybersecurity">
+<meta name="description" content="Instalacja Wazuha">
+<meta name="author" content="Michał Adamczyk">
+<link rel="canonical" href="//localhost:1313/posts/projects/wazuh/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9de45e225101e4f99701d2b68fc6b8a1ef6027928be6391fa15bf7f56326c909.css" integrity="sha256-neReIlEB5PmXAdK2j8a4oe9gJ5KL5jkfoVv39WMmyQk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="pl" href="//localhost:1313/posts/projects/wazuh/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Sysmind Blog (Alt + H)">
+                <img src="//localhost:1313/images/sysmind_logo.jpg" alt="" aria-label="logo"
+                    height="40">Sysmind Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/posts/about/" title="O Mnie">
+                    <span>O Mnie</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/projects/" title="Projekty">
+                    <span>Projekty</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/publications/" title="Publikacje">
+                    <span>Publikacje</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Wazuh
+    </h1>
+    <div class="post-description">
+      Instalacja Wazuha
+    </div>
+    <div class="post-meta"><span title='2025-02-09 00:00:00 +0000 UTC'>lutego 9, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Michał Adamczyk
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Spis treści</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#instalacja-wazuh---kompletny-przewodnik-dla-pocz%c4%85tkuj%c4%85cych" aria-label="Instalacja Wazuh - kompletny przewodnik dla początkujących">Instalacja Wazuh - kompletny przewodnik dla początkujących</a><ul>
+                        
+                <li>
+                    <a href="#co-to-jest-wazuh" aria-label="Co to jest Wazuh?">Co to jest Wazuh?</a></li>
+                <li>
+                    <a href="#wymagania-systemowe" aria-label="Wymagania systemowe">Wymagania systemowe</a><ul>
+                        
+                <li>
+                    <a href="#dla-serwera-wazuh" aria-label="Dla serwera Wazuh:">Dla serwera Wazuh:</a></li>
+                <li>
+                    <a href="#dla-agent%c3%b3w-wazuh" aria-label="Dla agentów Wazuh:">Dla agentów Wazuh:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#krok-1-przygotowanie-systemu" aria-label="Krok 1: Przygotowanie systemu">Krok 1: Przygotowanie systemu</a></li>
+                <li>
+                    <a href="#krok-2-instalacja-serwera-wazuh" aria-label="Krok 2: Instalacja serwera Wazuh">Krok 2: Instalacja serwera Wazuh</a></li>
+                <li>
+                    <a href="#krok-3-instalacja-agent%c3%b3w" aria-label="Krok 3: Instalacja agentów">Krok 3: Instalacja agentów</a><ul>
+                        
+                <li>
+                    <a href="#dla-ubuntudebian" aria-label="Dla Ubuntu/Debian:">Dla Ubuntu/Debian:</a></li>
+                <li>
+                    <a href="#dla-windows" aria-label="Dla Windows:">Dla Windows:</a></li></ul>
+                </li>
+                <li>
+                    <a href="#krok-4-podstawowa-konfiguracja" aria-label="Krok 4: Podstawowa konfiguracja">Krok 4: Podstawowa konfiguracja</a></li>
+                <li>
+                    <a href="#krok-5-pierwsze-logowanie" aria-label="Krok 5: Pierwsze logowanie">Krok 5: Pierwsze logowanie</a></li>
+                <li>
+                    <a href="#najcz%c4%99stsze-problemy-i-rozwi%c4%85zania" aria-label="Najczęstsze problemy i rozwiązania">Najczęstsze problemy i rozwiązania</a></li>
+                <li>
+                    <a href="#co-dalej" aria-label="Co dalej?">Co dalej?</a></li>
+                <li>
+                    <a href="#wskaz%c3%b3wki-bezpiecze%c5%84stwa" aria-label="Wskazówki bezpieczeństwa">Wskazówki bezpieczeństwa</a></li>
+                <li>
+                    <a href="#przydatne-linki" aria-label="Przydatne linki">Przydatne linki</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="instalacja-wazuh---kompletny-przewodnik-dla-początkujących">Instalacja Wazuh - kompletny przewodnik dla początkujących<a hidden class="anchor" aria-hidden="true" href="#instalacja-wazuh---kompletny-przewodnik-dla-początkujących">#</a></h1>
+<p>Cześć! W dzisiejszym wpisie przeprowadzę Cię przez proces instalacji Wazuh - potężnego narzędzia do monitorowania bezpieczeństwa. Niezależnie od tego, czy zabezpieczasz małą firmę czy własne projekty, Wazuh może znacząco poprawić Twoje bezpieczeństwo IT.</p>
+<h2 id="co-to-jest-wazuh">Co to jest Wazuh?<a hidden class="anchor" aria-hidden="true" href="#co-to-jest-wazuh">#</a></h2>
+<p>Wazuh to wszechstronne narzędzie open-source, które łączy w sobie:</p>
+<ul>
+<li>Monitoring bezpieczeństwa w czasie rzeczywistym</li>
+<li>Wykrywanie włamań</li>
+<li>Monitorowanie integralności plików</li>
+<li>Reagowanie na zagrożenia</li>
+<li>Zgodność z przepisami (GDPR, PCI DSS)</li>
+</ul>
+<h2 id="wymagania-systemowe">Wymagania systemowe<a hidden class="anchor" aria-hidden="true" href="#wymagania-systemowe">#</a></h2>
+<p>Zanim zaczniemy, upewnij się, że Twój serwer spełnia minimalne wymagania:</p>
+<h3 id="dla-serwera-wazuh">Dla serwera Wazuh:<a hidden class="anchor" aria-hidden="true" href="#dla-serwera-wazuh">#</a></h3>
+<ul>
+<li>CPU: minimum 4 rdzenie</li>
+<li>RAM: minimum 8GB (zalecane 16GB)</li>
+<li>Dysk: minimum 50GB (zalecane 100GB)</li>
+<li>System: Ubuntu 22.04 LTS (zalecany)</li>
+</ul>
+<h3 id="dla-agentów-wazuh">Dla agentów Wazuh:<a hidden class="anchor" aria-hidden="true" href="#dla-agentów-wazuh">#</a></h3>
+<ul>
+<li>CPU: 2 rdzenie</li>
+<li>RAM: 2GB</li>
+<li>Dysk: 20GB</li>
+<li>Wspierane systemy: Linux, Windows, macOS</li>
+</ul>
+<h2 id="krok-1-przygotowanie-systemu">Krok 1: Przygotowanie systemu<a hidden class="anchor" aria-hidden="true" href="#krok-1-przygotowanie-systemu">#</a></h2>
+<p>Najpierw zaktualizujmy system i skonfigurujmy podstawowe zabezpieczenia:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Aktualizacja systemu</span>
+</span></span><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Konfiguracja firewalla</span>
+</span></span><span class="line"><span class="cl">sudo ufw allow 1514/tcp  <span class="c1"># Komunikacja agent-server</span>
+</span></span><span class="line"><span class="cl">sudo ufw allow 1515/tcp  <span class="c1"># Rejestracja agentów</span>
+</span></span><span class="line"><span class="cl">sudo ufw allow 443/tcp   <span class="c1"># Panel webowy</span>
+</span></span><span class="line"><span class="cl">sudo ufw <span class="nb">enable</span>
+</span></span></code></pre></div><h2 id="krok-2-instalacja-serwera-wazuh">Krok 2: Instalacja serwera Wazuh<a hidden class="anchor" aria-hidden="true" href="#krok-2-instalacja-serwera-wazuh">#</a></h2>
+<p>Teraz przechodzimy do właściwej instalacji:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Pobieranie instalatora</span>
+</span></span><span class="line"><span class="cl">curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Uruchomienie instalacji (opcja -a instaluje wszystkie komponenty)</span>
+</span></span><span class="line"><span class="cl">sudo bash ./wazuh-install.sh -a
+</span></span></code></pre></div><p>Po instalacji sprawdź, czy wszystkie usługi działają poprawnie:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status wazuh-manager
+</span></span><span class="line"><span class="cl">sudo systemctl status wazuh-indexer
+</span></span><span class="line"><span class="cl">sudo systemctl status wazuh-dashboard
+</span></span></code></pre></div><h2 id="krok-3-instalacja-agentów">Krok 3: Instalacja agentów<a hidden class="anchor" aria-hidden="true" href="#krok-3-instalacja-agentów">#</a></h2>
+<h3 id="dla-ubuntudebian">Dla Ubuntu/Debian:<a hidden class="anchor" aria-hidden="true" href="#dla-ubuntudebian">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.7.5-1_amd64.deb
+</span></span><span class="line"><span class="cl">sudo <span class="nv">WAZUH_MANAGER</span><span class="o">=</span><span class="s1">&#39;ip_twojego_serwera&#39;</span> <span class="nv">WAZUH_AGENT_NAME</span><span class="o">=</span><span class="s1">&#39;nazwa_hosta&#39;</span> dpkg -i ./wazuh-agent_4.7.5-1_amd64.deb
+</span></span><span class="line"><span class="cl">sudo systemctl start wazuh-agent
+</span></span></code></pre></div><h3 id="dla-windows">Dla Windows:<a hidden class="anchor" aria-hidden="true" href="#dla-windows">#</a></h3>
+<ol>
+<li>Pobierz instalator ze strony Wazuh</li>
+<li>Uruchom instalator jako administrator</li>
+<li>Podaj adres IP serwera Wazuh podczas instalacji</li>
+</ol>
+<h2 id="krok-4-podstawowa-konfiguracja">Krok 4: Podstawowa konfiguracja<a hidden class="anchor" aria-hidden="true" href="#krok-4-podstawowa-konfiguracja">#</a></h2>
+<p>Główny plik konfiguracyjny serwera znajduje się w <code>/var/ossec/etc/ossec.conf</code>. Oto przykładowa podstawowa konfiguracja:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;ossec_config&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;global&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;email_notification&gt;</span>yes<span class="nt">&lt;/email_notification&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;email_to&gt;</span>twoj@email.com<span class="nt">&lt;/email_to&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;smtp_server&gt;</span>smtp.twojserwer.com<span class="nt">&lt;/smtp_server&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;email_from&gt;</span>wazuh@twojadomena.com<span class="nt">&lt;/email_from&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/global&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;syscheck&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;frequency&gt;</span>43200<span class="nt">&lt;/frequency&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;directories</span> <span class="na">check_all=</span><span class="s">&#34;yes&#34;</span><span class="nt">&gt;</span>/etc,/usr/bin,/usr/sbin<span class="nt">&lt;/directories&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;directories</span> <span class="na">check_all=</span><span class="s">&#34;yes&#34;</span><span class="nt">&gt;</span>/var/www,/var/lib<span class="nt">&lt;/directories&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/syscheck&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ossec_config&gt;</span>
+</span></span></code></pre></div><h2 id="krok-5-pierwsze-logowanie">Krok 5: Pierwsze logowanie<a hidden class="anchor" aria-hidden="true" href="#krok-5-pierwsze-logowanie">#</a></h2>
+<ol start="4">
+<li>Otwórz przeglądarkę i przejdź do <code>https://ip_twojego_serwera</code></li>
+<li>Zaloguj się używając domyślnych danych (znajdziesz je w <code>/var/ossec/etc/wazuh-dashboard/credentials.txt</code>)</li>
+<li>Zmień hasło przy pierwszym logowaniu</li>
+</ol>
+<h2 id="najczęstsze-problemy-i-rozwiązania">Najczęstsze problemy i rozwiązania<a hidden class="anchor" aria-hidden="true" href="#najczęstsze-problemy-i-rozwiązania">#</a></h2>
+<ol start="7">
+<li><strong>Problem z połączeniem agenta:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Sprawdź status agenta</span>
+</span></span><span class="line"><span class="cl">sudo systemctl status wazuh-agent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sprawdź logi</span>
+</span></span><span class="line"><span class="cl">tail -f /var/ossec/logs/ossec.log
+</span></span></code></pre></div><ol start="8">
+<li><strong>Problemy z serwerem:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Weryfikacja statusu</span>
+</span></span><span class="line"><span class="cl">sudo systemctl status wazuh-manager
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sprawdzenie logów</span>
+</span></span><span class="line"><span class="cl">tail -f /var/ossec/logs/ossec.log
+</span></span></code></pre></div><h2 id="co-dalej">Co dalej?<a hidden class="anchor" aria-hidden="true" href="#co-dalej">#</a></h2>
+<p>Po podstawowej instalacji warto:
+9. Skonfigurować dodatkowe reguły monitorowania
+10. Ustawić powiadomienia (np. przez Slack lub email)
+11. Skonfigurować regular backups
+12. Dostosować dashboardy do swoich potrzeb</p>
+<h2 id="wskazówki-bezpieczeństwa">Wskazówki bezpieczeństwa<a hidden class="anchor" aria-hidden="true" href="#wskazówki-bezpieczeństwa">#</a></h2>
+<ol start="13">
+<li>Regularnie aktualizuj system i komponenty Wazuh</li>
+<li>Zmień domyślne hasła</li>
+<li>Ogranicz dostęp do panelu administracyjnego</li>
+<li>Włącz uwierzytelnianie dwuskładnikowe</li>
+<li>Regularnie twórz kopie zapasowe konfiguracji</li>
+</ol>
+<h2 id="przydatne-linki">Przydatne linki<a hidden class="anchor" aria-hidden="true" href="#przydatne-linki">#</a></h2>
+<ul>
+<li><a href="https://documentation.wazuh.com">Oficjalna dokumentacja Wazuh</a></li>
+<li><a href="https://groups.google.com/g/wazuh">Forum społeczności Wazuh</a></li>
+<li><a href="https://github.com/wazuh/wazuh">GitHub Wazuh</a></li>
+</ul>
+<p>Mam nadzieję, że ten przewodnik pomoże Ci w sprawnej instalacji Wazuh! Jeśli masz pytania, zostaw komentarz poniżej.</p>
+<p><em>Ostatnia aktualizacja: Luty 2025</em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="//localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="//localhost:1313/tags/cybersecurity/">Cybersecurity</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:1313/">Sysmind Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

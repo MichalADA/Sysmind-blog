@@ -1,0 +1,4 @@
+﻿---
+title: "Publikacje"
+layout: "publications"
+---
