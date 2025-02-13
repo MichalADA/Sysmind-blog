@@ -51,12 +51,28 @@ Projekt składa się z trzech głównych komponentów:
 
 ### Wymagania wstępne
 
-Przed rozpoczęciem instalacji upewnij się, że masz zainstalowane:
+Przed rozpoczęciem instalacji upewnij się, że masz zainstalowane niezbędne komponenty:
 
+#### System operacyjny
+- **Windows**: 
+  - WSL2 (Windows Subsystem for Linux)
+  - Docker Desktop
+- **macOS**: 
+  - Docker Desktop
+- **Linux**: 
+  - Docker
+
+#### Instalacja Devbox
+1. Zainstaluj Devbox za pomocą skryptu instalacyjnego:
+   ```bash
+   curl -fsSL https://get.jetify.com/devbox | bash
+   ```
+
+#### Pozostałe wymagania
 - Klaster Kubernetes (np. Kind)
-- Devbox
-- Docker
-- Task
+- Minimum 8GB RAM
+- 4 rdzenie CPU
+- 20GB przestrzeni dyskowej
 
 ### Krok po kroku
 
@@ -211,12 +227,10 @@ tasks:
 
 ## Uwagi końcowe
 
-- Model DeepSeek-R1 jest zoptymalizowany pod kątem wydajności, ale może działać wolniej na słabszych maszynach
-- Model jak widac dziala , troche zajmuje mu odpowiadanie na pytania 
+- Model DeepSeek-R1 jest zoptymalizowany pod kątem wydajności, ale może działać wolniej na słabszych maszynach 
 - W przypadku problemów z dostępem do interfejsu, sprawdź status przekierowania portów
 - Regularnie monitoruj zużycie zasobów klastra
 
 ---
 
- 
 🚀 **Powodzenia w implementacji!**
