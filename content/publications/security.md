@@ -1,5 +1,9 @@
-# Najczęściej Atakowane Porty Sieciowe - Kompleksowy Przewodnik Bezpieczeństwa
-**Data: 24.02.2025**
+---
+title: 'Zabezpieczenia Informatyczne'
+date: 2025-02-10
+draft: false
+tags: ['cybersecurity', 'networking', 'security', 'ports']
+---
 
 ## Wprowadzenie
 
