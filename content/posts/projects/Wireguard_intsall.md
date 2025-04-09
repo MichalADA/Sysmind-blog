@@ -1,3 +1,11 @@
++++ 
+title = "Własny VPN z WireGuard na VPS (Ubuntu)"
+date = "2025-04-09"
+description = "Konfiguracja bezpiecznego tunelu VPN z WireGuard na serwerze Ubuntu"
+tags = ["Linux", "VPN", "Bezpieczeństwo", "WireGuard"]
+categories = ["Projekty"]
+draft = false 
++++
 
 # 🛡️ Własny VPN z WireGuard na VPS (Ubuntu)
 
