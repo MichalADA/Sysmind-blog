@@ -353,4 +353,4 @@ W miarę jak chmury natywne stają się standardem w branży IT, umiejętność 
 
 ---
 
-*Czy korzystacie już z Helm Charts w swoich projektach? Z jakimi wyzwaniami się spotykacie? Podzielcie się w komentarzach!*
+
